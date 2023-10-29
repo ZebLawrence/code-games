@@ -11,7 +11,10 @@ export class SiteIndex extends LitElement {
   static styles = []
 
   isCurrentPage(path) {
-    return window.location.pathname.toLowerCase() === path.toLowerCase()
+    const locationPath = window.location.pathname.toLowerCase().replaceAll('/', '')
+    path = path.toLowerCase().replaceAll('/', '')
+    console.log('The replaced', locationPath)
+    return locationPath === path
   }
 
   constructor() {
