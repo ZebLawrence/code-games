@@ -13,5 +13,11 @@ export default {
       path: '/2023/day-two',
       file: import(`./pages/2023/2023-12-2.js`),
     },
+    {
+      tag: 'home-page',
+      title: 'Code Games',
+      path: '/',
+      file: import(`./pages/home.js`),
+    },
   ]
 }
