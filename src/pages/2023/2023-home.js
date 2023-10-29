@@ -1,14 +1,14 @@
 import { LitElement, css, html } from 'lit'
 
-const elementName = 'home-page'
+const elementName = 'home-page-twothree'
 
-export const home = {
+export const home2023 = {
   tag: elementName,
-  title: 'Code Games',
-  path: '/',
+  title: '2023 Challenges',
+  path: '/2023/'
 }
 
-export class HomePage extends LitElement {
+export class HomePageTwoThree extends LitElement {
   static properties = {
     title: { type: String }
   }
@@ -30,10 +30,10 @@ export class HomePage extends LitElement {
       title
     } = this
     return html`
-      <div class="card">Home</div>
+      <div class="card">HomePageTwoThree</div>
     `
   }
 
 }
 
-!window.customElements.get(elementName) && window.customElements.define(elementName, HomePage)
+!window.customElements.get(elementName) && window.customElements.define(elementName, HomePageTwoThree)

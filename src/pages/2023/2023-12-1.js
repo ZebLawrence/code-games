@@ -2,6 +2,12 @@ import { LitElement, css, html } from 'lit'
 
 const elementName = 'day-one'
 
+export const dayOne2023 = {
+  tag: elementName,
+  title: '2023 Day One',
+  path: '/2023/day-one/',
+}
+
 export class DayOne extends LitElement {
   static properties = {
     title: { type: String }
@@ -10,7 +16,7 @@ export class DayOne extends LitElement {
   static styles = [
     css`
       .card{
-        border: 1px solid red;
+        //border: 1px solid red;
       }
     `
   ]
