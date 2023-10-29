@@ -1,0 +1,9 @@
+{
+  "files": {
+    "../index.html": {
+      "label": "index.html"
+    },
+    "my-element.js": {},
+    "index.css": {}
+  }
+}
