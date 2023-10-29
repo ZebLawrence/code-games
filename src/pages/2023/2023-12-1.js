@@ -5,7 +5,7 @@ const elementName = 'day-one'
 export const dayOne2023 = {
   tag: elementName,
   title: '2023 Day One',
-  path: '/2023/day-one/',
+  path: '#/2023/day-one/',
 }
 
 export class DayOne extends LitElement {

@@ -10,12 +10,29 @@ import './components/page-template'
 const elementName = 'site-index'
 
 export class SiteIndex extends LitElement {
-  static properties = {}
+  static properties = {
+    currentUrl: { }
+  }
 
   static styles = []
 
   constructor() {
     super()
+    this.currentUrl = ''
+  }
+
+  handleHashChange({ newURL }) {
+    this.currentUrl = newURL
+  }
+
+  connectedCallback() {
+    super.connectedCallback()
+    window.addEventListener("hashchange", event => this.handleHashChange(event));
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback()
+    window.removeEventListener('hashchange', event => this.handleHashChange(event));
   }
 
   render() {

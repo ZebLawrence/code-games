@@ -5,7 +5,7 @@ const elementName = 'home-page-twothree'
 export const home2023 = {
   tag: elementName,
   title: '2023 Challenges',
-  path: '/2023/'
+  path: '#/2023/'
 }
 
 export class HomePageTwoThree extends LitElement {
