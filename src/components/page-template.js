@@ -1,4 +1,4 @@
-import { LitElement, css, html, nothing, unsafeCSS } from 'lit'
+import { LitElement, css, html, nothing } from 'lit'
 import '@spectrum-web-components/top-nav/sp-top-nav.js'
 import '@spectrum-web-components/top-nav/sp-top-nav-item.js'
 import '@spectrum-web-components/action-menu/sync/sp-action-menu.js'
@@ -8,12 +8,9 @@ import '@spectrum-web-components/picker/sp-picker.js'
 import '@spectrum-web-components/link/sp-link.js'
 import '@spectrum-web-components/sidenav/sp-sidenav.js'
 import '@spectrum-web-components/sidenav/sp-sidenav-item.js'
-import 'playground-elements/playground-ide.js'
-import 'playground-elements/playground-project.js'
-import 'playground-elements/playground-file-editor.js'
-import playgroundStyle from 'playground-elements/themes/monokai.css?inline'
 import siteConfig from '../site-config'
 import { buildMenu } from './menu'
+import './my-playground'
 
 export class PageTemplate extends LitElement {
   static properties = {
@@ -22,7 +19,6 @@ export class PageTemplate extends LitElement {
   }
 
   static styles = [
-    unsafeCSS(playgroundStyle),
     css`
       h1{
         margin-top: 0;
@@ -36,6 +32,14 @@ export class PageTemplate extends LitElement {
         box-sizing: border-box;
         overflow-x: hidden;
         overflow-y: hidden;
+        position: relative;
+      }
+      footer{
+        position: absolute;
+        bottom: 0px;
+        width: calc(100% - 2em);
+        display: flex;
+        justify-content: space-between;
       }
     `
   ]
@@ -63,18 +67,7 @@ export class PageTemplate extends LitElement {
     } = siteConfig
 
     const menus = Object.entries(groups).map(buildMenu)
-    const playground = codeFileName
-      ? html`
-        <playground-project class="playground-theme-monokai" id="codeproject" project-src="./playground.config.json"></playground-project>
-        <playground-file-editor
-          line-numbers
-          type="js"
-          class="playground-theme-monokai"
-          project="codeproject"
-          filename=${codeFileName}
-        ></playground-file-editor>
-      `
-      : nothing
+
     return html`
       <main class="container">
         <header>
@@ -89,7 +82,10 @@ export class PageTemplate extends LitElement {
           </nav>
         </header>
         <slot></slot>
-        <div>${playground}</div>
+        <footer>
+          <my-playground codeFileName=${codeFileName}></my-playground>
+          <sp-link target="_blank" href="https://adventofcode.com/2022/leaderboard/private/view/1083410">Private Leaderboard</sp-link>
+        </footer>
       </main>
     `
   }
