@@ -1,25 +1,26 @@
 import { LitElement, css, html } from 'lit'
 
+/* playground-hide */
 const elementName = 'day-two'
 
 export const dayTwo2023 = {
   tag: elementName,
   title: '2023 Day Two',
   path: '#/2023/day-two/',
+  codeFileName: '2023-12-2.js',
 }
+/* playground-hide-end */
 
 export class DayTwo extends LitElement {
   static properties = {
     title: { type: String }
   }
 
-  static styles = [
-    css`
-      .card{
-        //border: 1px solid red;
-      }
-    `
-  ]
+  static styles = [css`
+    .card{
+      border: 1px solid red;
+    }
+  `]
 
   constructor() {
     super()

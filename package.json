@@ -4,9 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "clean": "rimraf dist",
-    "start": "vite --config=dev-vite.config.js",
-    "build": "vite build",
+    "clean": "rimraf dist public/playground.config.json",
+    "start": "npm run build:playground && npm run start:vite",
+    "start:vite": "vite --config=dev-vite.config.js",
+    "build": "npm run build:playground && npm run build:vite",
+    "build:vite": "vite build",
+    "build:playground": "node write-code-content.js",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -42,9 +42,9 @@ export class SiteIndex extends LitElement {
 
     return html`
       <sp-theme color="dark" scale="large">
-        ${pagesConfig.filter(p => isCurrentPage(p.path)).map(({ tag, title }) => {
+        ${pagesConfig.filter(p => isCurrentPage(p.path)).map(({ tag, title, codeFileName }) => {
           return html`
-            <page-template title=${title}>
+            <page-template title=${title} codeFileName=${codeFileName}>
               ${unsafeHTML(`<${tag}></${tag}>`)}
             </page-template>
           `
