@@ -1,7 +1,7 @@
 import { LitElement, css, html } from 'lit'
 
 /* playground-hide */
-const elementName = 'day-one'
+const elementName = 'day-one-two-three'
 
 export const dayOne2023 = {
   tag: elementName,

@@ -8,7 +8,7 @@ import { PuzzleToggleWithLit } from '../../mixins/puzzleToggle'
 import { examplePuzzle, exampleAnswer, fullPuzzle } from './puzzles/2020-12-1-puzzle'
 
 /* playground-hide */
-const elementName = 'day-one'
+const elementName = 'day-one-two-zero'
 
 export const dayOne2020 = {
   tag: elementName,

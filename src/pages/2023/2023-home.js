@@ -1,6 +1,6 @@
 import { LitElement, css, html } from 'lit'
 
-const elementName = 'home-page-twothree'
+const elementName = 'home-page-two-three'
 
 export const home2023 = {
   tag: elementName,
