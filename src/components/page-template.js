@@ -11,6 +11,25 @@ import '@spectrum-web-components/sidenav/sp-sidenav-item.js'
 import siteConfig from '../site-config'
 import { buildMenu } from './menu'
 import codeLogo from '../assets/console.svg'
+import bg1 from '../assets/BG_001.jpg'
+import bg2 from '../assets/BG_002.jpg'
+import bg3 from '../assets/BG_003.jpg'
+import bg4 from '../assets/BG_004.jpg'
+import bg5 from '../assets/BG_005.jpg'
+import bg6 from '../assets/BG_006.jpg'
+import bg7 from '../assets/BG_007.jpg'
+import bg8 from '../assets/BG_008.jpg'
+import bg9 from '../assets/BG_009.jpg'
+import bg10 from '../assets/BG_010.jpg'
+import bg11 from '../assets/BG_011.jpg'
+import bg12 from '../assets/BG_012.jpg'
+import bg13 from '../assets/BG_013.jpg'
+import bg14 from '../assets/BG_014.jpg'
+import bg15 from '../assets/BG_015.jpg'
+import bg16 from '../assets/BG_016.jpg'
+import bg17 from '../assets/BG_017.jpg'
+import bg18 from '../assets/BG_018.jpg'
+import bg19 from '../assets/BG_019.jpg'
 import './my-playground'
 
 export class PageTemplate extends LitElement {
@@ -31,6 +50,7 @@ export class PageTemplate extends LitElement {
       }
       nav{
         margin-bottom: 1em;
+        backdrop-filter: blur(10px);
       }
       .container{
         padding-left: 1em;
@@ -38,10 +58,23 @@ export class PageTemplate extends LitElement {
         width: 100vw;
         height: 100vh;
         min-height: 100%;
+        position: relative;
         box-sizing: border-box;
         overflow-x: hidden;
         overflow-y: hidden;
-        position: relative;
+        z-index: 1;
+      }
+      .bg-image{
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        min-height: 100%;
+        background-size: cover;
+        background-position: center;
+        top: 0px;
+        left: 0px;
+        z-index: 0;
+        filter: brightness(20%);
       }
       footer{
         position: absolute;
@@ -49,6 +82,7 @@ export class PageTemplate extends LitElement {
         width: calc(100% - 2em);
         display: flex;
         justify-content: space-between;
+        backdrop-filter: blur(10px);
       }
       footer .links sp-link:not(:last-child)::after{
         content: '|';
@@ -63,6 +97,27 @@ export class PageTemplate extends LitElement {
     this.title = 'Some Code'
     this.codeFileName = null
     this.adventUrl = null
+    this.backgrounds = [
+      bg1,
+      bg2,
+      bg3,
+      bg4,
+      bg5,
+      bg6,
+      bg7,
+      bg8,
+      bg9,
+      bg10,
+      bg11,
+      bg12,
+      bg13,
+      bg14,
+      bg15,
+      bg16,
+      bg17,
+      bg18,
+      bg19,
+    ]
   }
 
   firstUpdated() {
@@ -74,11 +129,13 @@ export class PageTemplate extends LitElement {
     const {
       codeFileName,
       adventUrl,
+      backgrounds,
     } = this
     const {
       main,
       groups
     } = siteConfig
+    const bgImage = backgrounds[Math.floor(Math.random() * 19)]
 
     const menus = Object.entries(groups).map(buildMenu)
     console.log('The render template')
@@ -108,6 +165,7 @@ export class PageTemplate extends LitElement {
           </div>
         </footer>
       </main>
+      <div class="bg-image" style="background-image: url(${bgImage})"></div>
     `
   }
 

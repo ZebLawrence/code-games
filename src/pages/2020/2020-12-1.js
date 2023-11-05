@@ -76,7 +76,9 @@ export class DayOne extends PuzzleToggleWithLit {
 
     return html`
       <div class="d-flex justify-even">
-        ${puzzleSwitcher(selectedPuzzle, puzzles, this.togglePuzzle, dayOne2020.adventUrl)}
+        <my-card width=${25} isFirst>
+          ${puzzleSwitcher(selectedPuzzle, puzzles, this.togglePuzzle, dayOne2020.adventUrl)}
+        </my-card>
         <my-card label="Part 1">
           ${badge('Pair found')}
           <pre>${JSON.stringify(pair2020, null, 2)}</pre>

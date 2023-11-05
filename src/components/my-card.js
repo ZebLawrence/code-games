@@ -3,16 +3,13 @@ import '@spectrum-web-components/banner/sp-banner.js'
 
 export class MyCard extends LitElement {
   static properties = {
-    label: {}
+    label: {},
+    width: { type: Number },
+    isFirst: { type: Boolean },
   }
 
   static styles = [
     css`
-      :host{
-        display: flex;
-        flex-basis: 100%;
-        margin-left: 1em;
-      }
       .card{
         position: relative;
         width: 100%;
@@ -21,6 +18,7 @@ export class MyCard extends LitElement {
         box-shadow: 0px 0px 1em 1em rgba(0,0,0,0.25) inset;
         -webkit-box-shadow: 0px 0px 1em 1em rgba(0,0,0,0.25) inset;
         -moz-box-shadow: 0px 0px 1em 1em rgba(0,0,0,0.25) inset;
+        backdrop-filter: blur(10px);
       }
       sp-banner{
         box-shadow: 0px 0px 0.3em 0.3em rgba(0,0,0,0.25);
@@ -38,6 +36,8 @@ export class MyCard extends LitElement {
   render() {
     const {
       label,
+      width,
+      isFirst,
     } = this
 
     const banner = label
@@ -50,7 +50,22 @@ export class MyCard extends LitElement {
       `
       : nothing
 
+    const flexBasis = width
+      ? `${width}%`
+      : '100%'
+
+    const marginLeft = isFirst
+      ? `0px`
+      : '1em'
+
     return html`
+      <style>
+        :host{
+          display: flex;
+          flex-basis: ${flexBasis};
+          margin-left: ${marginLeft};
+        }
+      </style>
       <div class="card">
         ${banner}
         <slot></slot>
