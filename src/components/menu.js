@@ -8,7 +8,7 @@ export const buildMenuItem = ({ path, title }) => {
       value=${title}
       href=${path}
       label=${title}
-      .selected=${true}
+      .selected=${selected}
     ></sp-sidenav-item>
   `
 }

@@ -1,0 +1,36 @@
+import { LitElement } from "lit";
+
+export const PuzzleToggle = (superClass) => {
+  class PuzzleToggleElement extends superClass {
+    static properties = {
+      selectedPuzzle: { state: true, type: String },
+      puzzles: { state: true, type: Object },
+      puzzle: { state: true, type: Object },
+      title: { type: String },
+    };
+
+    togglePuzzle({ currentTarget }) {
+      const { value } = currentTarget
+      this.selectedPuzzle = value
+    }
+
+    constructor(puzzles) {
+      super();
+      this.puzzle = []
+      this.puzzles = puzzles
+      this.selectedPuzzle = 'examplePuzzle'
+    }
+
+    updated(updates) {
+      super.updated(updates)
+      const { puzzle, parseInput, puzzles, selectedPuzzle } = this
+      if (updates.has('selectedPuzzle')) {
+        this.startTime = performance.now();
+        this.puzzle = parseInput(puzzles[selectedPuzzle])
+      }
+    }
+  }
+  return PuzzleToggleElement;
+};
+
+export const PuzzleToggleWithLit = PuzzleToggle(LitElement)

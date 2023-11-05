@@ -1,5 +1,8 @@
 {
   "files": {
+    "2020-12-1.js": {
+      "content": "console.log('This is the temp holder till the content gets added during build 1')"
+    },
     "2023-12-1.js": {
       "content": "console.log('This is the temp holder till the content gets added during build 1')"
     },

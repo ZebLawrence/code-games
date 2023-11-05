@@ -1,4 +1,4 @@
-import { LitElement, css, html, nothing } from 'lit'
+import { LitElement, css, html } from 'lit'
 import '@spectrum-web-components/top-nav/sp-top-nav.js'
 import '@spectrum-web-components/top-nav/sp-top-nav-item.js'
 import '@spectrum-web-components/action-menu/sync/sp-action-menu.js'
@@ -10,12 +10,14 @@ import '@spectrum-web-components/sidenav/sp-sidenav.js'
 import '@spectrum-web-components/sidenav/sp-sidenav-item.js'
 import siteConfig from '../site-config'
 import { buildMenu } from './menu'
+import codeLogo from '../assets/console.svg'
 import './my-playground'
 
 export class PageTemplate extends LitElement {
   static properties = {
     title: { type: String },
     codeFileName: { type: String },
+    adventUrl: { type: String },
   }
 
   static styles = [
@@ -24,8 +26,15 @@ export class PageTemplate extends LitElement {
         margin-top: 0;
         margin-bottom: 0;
       }
+      h1 .logo{
+        height: 50px;
+      }
+      nav{
+        margin-bottom: 1em;
+      }
       .container{
-        padding: 1em;
+        padding-left: 1em;
+        padding-right: 1em;
         width: 100vw;
         height: 100vh;
         min-height: 100%;
@@ -41,13 +50,19 @@ export class PageTemplate extends LitElement {
         display: flex;
         justify-content: space-between;
       }
+      footer .links sp-link:not(:last-child)::after{
+        content: '|';
+        padding: 0.5em;
+        color: rgba(var(--spectrum-gray-300-rgb));
+      }
     `
   ]
 
   constructor() {
     super()
-    this.title = 'Code Games'
+    this.title = 'Some Code'
     this.codeFileName = null
+    this.adventUrl = null
   }
 
   firstUpdated() {
@@ -57,9 +72,8 @@ export class PageTemplate extends LitElement {
 
   render() {
     const {
-      title,
-      isCurrentPage,
-      codeFileName
+      codeFileName,
+      adventUrl,
     } = this
     const {
       main,
@@ -67,13 +81,13 @@ export class PageTemplate extends LitElement {
     } = siteConfig
 
     const menus = Object.entries(groups).map(buildMenu)
-
+    console.log('The render template')
     return html`
       <main class="container">
         <header>
-          <h1>${title}</h1>
           <nav>
             <sp-top-nav>
+              <h1><img class="logo" src=${codeLogo} alt="console prompt graphic"/></h1>
               ${main.map(({ path, title }) => {
                 return html`<sp-top-nav-item href=${path}>${title}</sp-top-nav-item>`
               })}
@@ -84,7 +98,14 @@ export class PageTemplate extends LitElement {
         <slot></slot>
         <footer>
           <my-playground codeFileName=${codeFileName}></my-playground>
-          <sp-link target="_blank" href="https://adventofcode.com/2022/leaderboard/private/view/1083410">Private Leaderboard</sp-link>
+          ${adventUrl && html`<sp-link quiet target="_blank" href=${adventUrl}>This Puzzle</sp-link>`}
+          <div class="links">
+            <sp-link quiet target="_blank" href="https://adventofcode.com/2022/leaderboard/private/view/1083410">Private Leaderboard</sp-link>
+            <sp-link quiet target="_blank" href="https://adventofcode.com/2020">2020</sp-link>
+            <sp-link quiet target="_blank" href="https://adventofcode.com/2021">2021</sp-link>
+            <sp-link quiet target="_blank" href="https://adventofcode.com/2022">2022</sp-link>
+            <sp-link quiet target="_blank" href="https://adventofcode.com/2023">2023</sp-link>
+          </div>
         </footer>
       </main>
     `

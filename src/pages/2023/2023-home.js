@@ -5,7 +5,7 @@ const elementName = 'home-page-twothree'
 export const home2023 = {
   tag: elementName,
   title: '2023 Challenges',
-  path: '#/2023/'
+  path: '#/2023/',
 }
 
 export class HomePageTwoThree extends LitElement {
@@ -23,6 +23,7 @@ export class HomePageTwoThree extends LitElement {
 
   constructor() {
     super()
+    this.title = home2023.title
   }
 
   render() {
@@ -30,7 +31,7 @@ export class HomePageTwoThree extends LitElement {
       title
     } = this
     return html`
-      <div class="card">HomePageTwoThree</div>
+      <div class="card">${title}</div>
     `
   }
 

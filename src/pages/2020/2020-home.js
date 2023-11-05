@@ -1,14 +1,14 @@
 import { LitElement, css, html } from 'lit'
 
-const elementName = 'home-page'
+const elementName = 'home-page-twozero'
 
-export const home = {
+export const home2020 = {
   tag: elementName,
-  title: 'Home',
-  path: '/',
+  title: '2020 Challenges',
+  path: '#/2020/',
 }
 
-export class HomePage extends LitElement {
+export class HomePageTwoZero extends LitElement {
   static properties = {
     title: { type: String }
   }
@@ -23,7 +23,7 @@ export class HomePage extends LitElement {
 
   constructor() {
     super()
-    this.title = home.title
+    this.title = home2020.title
   }
 
   render() {
@@ -37,4 +37,4 @@ export class HomePage extends LitElement {
 
 }
 
-!window.customElements.get(elementName) && window.customElements.define(elementName, HomePage)
+!window.customElements.get(elementName) && window.customElements.define(elementName, HomePageTwoZero)
