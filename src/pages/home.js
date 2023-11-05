@@ -1,4 +1,6 @@
 import { LitElement, css, html } from 'lit'
+import { TypeCode } from '../components/type-code?inline'
+import '../components/type-code'
 
 const elementName = 'home-page'
 
@@ -31,7 +33,10 @@ export class HomePage extends LitElement {
       title
     } = this
     return html`
-      <div class="card">${title}</div>
+      <div class="card">
+        <type-code content="The first puzzles will unlock on December 1st at midnight EST (UTC-5). See you then!\nIn the meantime, you can still access past"></type-code>
+        <type-code content=${TypeCode}></type-code>
+      </div>
     `
   }
 

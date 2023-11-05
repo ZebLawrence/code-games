@@ -49,10 +49,15 @@ export class PageTemplate extends LitElement {
         height: 50px;
       }
       nav{
-        margin-bottom: 1em;
         backdrop-filter: blur(10px);
+        position: fixed;
+        width: calc(100vw - 2em);
+        top: 0px;
+        z-index: 10;
       }
       .container{
+        padding-top: 4.5em;
+        padding-bottom: 4.5em;
         padding-left: 1em;
         padding-right: 1em;
         width: 100vw;
@@ -61,7 +66,7 @@ export class PageTemplate extends LitElement {
         position: relative;
         box-sizing: border-box;
         overflow-x: hidden;
-        overflow-y: hidden;
+        overflow-y: auto;
         z-index: 1;
       }
       .bg-image{
@@ -77,7 +82,7 @@ export class PageTemplate extends LitElement {
         filter: brightness(20%);
       }
       footer{
-        position: absolute;
+        position: fixed;
         bottom: 0px;
         width: calc(100% - 2em);
         display: flex;
