@@ -8,7 +8,7 @@
     "start": "npm run build:playground && npm run start:vite",
     "start:vite": "vite --config=dev-vite.config.js",
     "build": "npm run build:playground && npm run build:vite",
-    "build:vite": "vite build",
+    "build:vite": "vite build --config=build-vite.config.js",
     "build:playground": "node write-code-content.js",
     "preview": "vite preview"
   },
