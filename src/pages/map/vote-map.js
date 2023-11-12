@@ -24,11 +24,13 @@ export class VoteMap extends LitElement {
         width: 100%;
         height: 100%;
         z-index: 0;
+        overflow: hidden;
       }
       #map{
         width: 100%;
         height: 100%;
         z-index: 0;
+        transition: all 0.25s;
       }
       svg {
         z-index: 0;
@@ -55,7 +57,7 @@ export class VoteMap extends LitElement {
         pointer-events: none;
         color: #000;
         transition: all 0.25s;
-        translate: -50% -200%;
+        translate: -75% -150%;
       }
       .legend {
         background: #FFF;
@@ -139,7 +141,7 @@ export class VoteMap extends LitElement {
     const { width, height } = mapElement.getBoundingClientRect()
     const projection = d3.geoAlbersUsa()
       .translate([width / 2, height / 2])
-      .scale([width - 300])
+      .scale([width - 500])
     const path = d3.geoPath().projection(projection)
     const svg = d3.select(mapElement)
       .append("svg")
@@ -205,6 +207,18 @@ export class VoteMap extends LitElement {
     window.removeEventListener('resize', () => this.initChart())
   }
 
+  handleMouseOver(event) {
+    const { currentTarget, clientX, clientY } = event
+
+    const centerX = currentTarget.offsetLeft + currentTarget.offsetWidth / 2
+    const centerY = currentTarget.offsetTop + currentTarget.offsetHeight / 2
+
+    const tiltX = (centerX - clientX) / 30
+    const tiltY = (centerY - clientY) / 30
+
+    currentTarget.style.transform = `perspective(1000px) rotateX(${(tiltY * -1)}deg) rotateY(${(tiltX)}deg)`
+  }
+
   render() {
     const {
       statesData
@@ -212,7 +226,7 @@ export class VoteMap extends LitElement {
 
     return html`
       <div class="main">
-        <div id="map"></div>
+        <div @mouseover=${this.handleMouseOver} id="map"></div>
         <ul class="legend">
           ${statesData.map(([state, votes, color]) => {
             return html`
