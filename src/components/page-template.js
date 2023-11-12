@@ -94,6 +94,9 @@ export class PageTemplate extends LitElement {
         padding: 0.5em;
         color: rgba(var(--spectrum-gray-300-rgb));
       }
+      .hide{
+        display: none;
+      }
     `
   ]
 
@@ -140,7 +143,7 @@ export class PageTemplate extends LitElement {
       main,
       groups
     } = siteConfig
-    const bgImage = backgrounds[Math.floor(Math.random() * 19)]
+    const bgIndex = Math.floor(Math.random() * 19)
 
     const menus = Object.entries(groups).map(buildMenu)
     console.log('The render template')
@@ -170,7 +173,10 @@ export class PageTemplate extends LitElement {
           </div>
         </footer>
       </main>
-      <div class="bg-image" style="background-image: url(${bgImage})"></div>
+      ${backgrounds.map((bg, index) => {
+        return html`<div class="bg-image ${index === bgIndex ? '' : 'hide'}" style="background-image: url(${bg})"></div>`
+      })}
+      
     `
   }
 

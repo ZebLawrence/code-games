@@ -30,8 +30,12 @@
     "@spectrum-web-components/tooltip": "^0.39.4",
     "@spectrum-web-components/top-nav": "^0.39.3",
     "@spectrum-web-components/tray": "^0.39.3",
+    "d3": "^7.8.5",
+    "d3-geomap": "^3.3.0",
     "lit": "^2.7.6",
-    "playground-elements": "^0.18.1"
+    "numeral": "^2.0.6",
+    "playground-elements": "^0.18.1",
+    "topojson": "^3.0.2"
   },
   "devDependencies": {
     "rimraf": "^5.0.5",
