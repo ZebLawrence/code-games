@@ -129,7 +129,7 @@ export class VoteMap extends LitElement {
           const { population } = populationObj
           const dataValue = Number(csvData[i].votes)
           const val = (350 / dataValue)
-          const color = `rgb(${val},${val},${val})`
+          const color = `rgb(${0},${val},${0})`
           states.push([dataState, dataValue, color, Number(population)])
           if (votes.indexOf(dataValue) === -1) {
             votes.push(dataValue)
@@ -148,7 +148,7 @@ export class VoteMap extends LitElement {
         const sortedStates = states.sort((a, b) => b[1] - a[1])
         const colors = sorted.map(v => {
           const val = (350 / v)
-          return `rgb(${val},${val},${val})`
+          return `rgb(${0},${val},${0})`
         })
         const popSorted = states.sort((a, b) => a[3] - b[3])
         const lowestPop = popSorted[0][3]
