@@ -95,7 +95,7 @@ export class PageTemplate extends LitElement {
         color: rgba(var(--spectrum-gray-300-rgb));
       }
       .hide{
-        display: none;
+        visibility: hidden;
       }
     `
   ]
@@ -144,9 +144,8 @@ export class PageTemplate extends LitElement {
       groups
     } = siteConfig
     const bgIndex = Math.floor(Math.random() * 19)
-
     const menus = Object.entries(groups).map(buildMenu)
-    console.log('The render template')
+
     return html`
       <main class="container">
         <header>
