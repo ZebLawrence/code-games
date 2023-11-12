@@ -97,12 +97,13 @@ export class VoteMap extends LitElement {
     this.votesMax = Infinity
   }
 
-  firstUpdated() {
+  initChart() {
     const mapElement = this.shadowRoot.getElementById('map')
+    mapElement.innerHTML = ''
     const { width, height } = mapElement.getBoundingClientRect()
     const projection = d3.geoAlbersUsa()
       .translate([width/2, height/2])
-      .scale([1500])
+      .scale([width - 300])
     const path = d3.geoPath().projection(projection)
 
     const svg = d3.select(mapElement)
@@ -206,7 +207,21 @@ export class VoteMap extends LitElement {
               .duration(500)
               .style("opacity", 0)
           })
-      })
+      })    
+  }
+
+  firstUpdated() {
+    this.initChart()
+  }
+  
+  connectedCallback() {
+    super.connectedCallback()
+    window.addEventListener('resize', () => this.initChart())
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback()
+    window.removeEventListener('resize', () => this.initChart())
   }
 
   render() {
