@@ -8,6 +8,9 @@
     },
     "2023-12-2.js": {
       "content": "console.log('This is the temp holder till the content gets added during build 2')"
+    },
+    "vote-map.js": {
+      "content": "console.log('This is the temp holder till the content gets added during build 2')"
     }
   }
 }
