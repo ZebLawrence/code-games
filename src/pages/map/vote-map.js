@@ -1,23 +1,20 @@
 import { LitElement, css, html } from 'lit'
 import * as d3 from 'd3'
 import numeral from 'numeral'
-
-
+/* playground-hide */
 const elementName = 'vote-map'
-
 export const voteMap = {
   tag: elementName,
   title: 'Vote Map',
   path: '#/your-vote-worth',
+  codeFileName: 'vote-map.js',
 }
-
+/* playground-hide-end */
 export class VoteMap extends LitElement {
   static properties = {
-    title: { type: String },
     statesData: { state: true },
-    votesMax: { state: true },
-    votesMin: { state: true },
-    popSorted: { state: true },
+    lowestPop: { state: true },
+    chartData: { state: true },
   }
 
   static styles = [
@@ -90,130 +87,114 @@ export class VoteMap extends LitElement {
 
   constructor() {
     super()
-    this.title = voteMap.title
+    this.chartData = {}
     this.statesData = []
-    this.popSorted = 0
-    this.votesMin = 0
-    this.votesMax = Infinity
+    this.lowestPop = Infinity
+  }
+
+  async getChartData() {
+    const [csvVotes, csvPopulation, statesJson] = await Promise.all([
+      d3.csv('./statesvotes.csv'),
+      d3.csv('./statesPopulation.csv'),
+      d3.json('./us-states.json'),
+    ])
+    const states = []
+    let lowestPop = Infinity
+    csvVotes.forEach(({ state, votes }) => {
+      const populationObj = csvPopulation.find(x => x.state === state)
+      const population = Number(populationObj.population)
+      const electoralVotes = Number(votes)
+
+      if (population < lowestPop) {
+        lowestPop = population
+      }
+
+      for (let j = 0; j < statesJson.features.length; j++) {
+        const { name } = statesJson.features[j].properties
+        if (state  === name) {
+          const val = (350 / electoralVotes)
+          const color = `rgb(${0},${val},${0})`
+          statesJson.features[j].properties.votes = electoralVotes
+          statesJson.features[j].properties.color = color
+          statesJson.features[j].properties.population = population
+          states.push([state , electoralVotes, color, population])
+          break
+        }
+      }
+    })
+
+    this.statesData = states.sort((a, b) => a[3] - b[3])
+    this.lowestPop = lowestPop
+    this.chartData = statesJson
   }
 
   initChart() {
+    const {
+      chartData,
+      lowestPop
+    } = this
     const mapElement = this.shadowRoot.getElementById('map')
     mapElement.innerHTML = ''
+
     const { width, height } = mapElement.getBoundingClientRect()
     const projection = d3.geoAlbersUsa()
-      .translate([width/2, height/2])
+      .translate([width / 2, height / 2])
       .scale([width - 300])
     const path = d3.geoPath().projection(projection)
-
     const svg = d3.select(mapElement)
       .append("svg")
       .attr("width", '100%')
       .attr("height", '100%')
-            
     const tooltip = d3.select(mapElement)
-      .append("div")   
-      .attr("class", "tooltip")               
+      .append("div")
+      .attr("class", "tooltip")
       .style("opacity", 0)
 
-    Promise.all([
-      d3.csv('./statesvotes.csv'),
-      d3.csv('./statesPopulation.csv'),
-      d3.json('./us-states.json')
-    ]).then(([csvData, csvPopulation, statesJson]) => {
-
-        const votes = []
-        const states = []
-        for (let i = 0; i < csvData.length; i++) {
-          const dataState = csvData[i].state
-          const populationObj = csvPopulation.find(x => x.state === dataState)
-          const { population } = populationObj
-          const dataValue = Number(csvData[i].votes)
-          const val = (350 / dataValue)
-          const color = `rgb(${0},${val},${0})`
-          states.push([dataState, dataValue, color, Number(population)])
-          if (votes.indexOf(dataValue) === -1) {
-            votes.push(dataValue)
-          }
-
-          for (let j = 0; j < statesJson.features.length; j++)  {
-            const jsonState = statesJson.features[j].properties.name
-            if (dataState === jsonState) {
-              statesJson.features[j].properties.votes = dataValue 
-              statesJson.features[j].properties.population = Number(population)
-              break
-            }
-          }
-        }
-        const sorted = votes.sort((a, b) => a - b)
-        const sortedStates = states.sort((a, b) => b[1] - a[1])
-        const colors = sorted.map(v => {
-          const val = (350 / v)
-          return `rgb(${0},${val},${0})`
-        })
-        const popSorted = states.sort((a, b) => a[3] - b[3])
-        const lowestPop = popSorted[0][3]
-
-        this.votesMin = sorted[0]
-        this.votesMax = sorted[sorted.length - 1]
-        this.statesData = sortedStates
-
-        const color = d3.scaleLinear().range(colors)
-        color.domain(sorted)
-
-        svg.selectAll("path")
-          .data(statesJson.features)
-          .enter()
-          .append("path")
-          .attr("d", path)
-          .style("fill", function(d) {
-            const value = d.properties.votes
-
-            if (value) {
-              return color(value)
-            } else {
-              return "rgb(213,222,217)"
-            }
-          })
-          .on("mouseover", function(d, { properties: { name, votes, population } }) {
-            tooltip.transition()        
-              .duration(200)      
-              .style("opacity", .9)
-            tooltip.text(`${name} electoral votes: ${votes}`)
-              .style("left", (d.pageX) + "px")
-              .style("top", (d.pageY - 28) + "px")
-            tooltip.append('div')
-              .attr('class', 'population')
-              .text(`People per electoral vote: `)              
-              .append('span')
-              .attr('class', 'amount')
-              .text(numeral(population / votes).format('0,0.0'))
-            tooltip.append('div')
-              .attr('class', 'percent')
-              .text(`Percent of a person your vote is worth: `)
-              .append('span')
-              .attr('class', 'amount')
-              .text(numeral((lowestPop / votes) / (population / votes)).format('0.[00]%'))
-            tooltip.append('div')
-              .attr('class', 'worth')
-              .text(`Total people per one person:`)
-              .append('span')
-              .attr('class', 'amount')
-              .text(numeral((population / votes) / (lowestPop / votes)).format('0.[0000]'))
-
-          })             
-          .on("mouseout", function(d) {       
-            tooltip.transition()        
-              .duration(500)
-              .style("opacity", 0)
-          })
-      })    
+    svg.selectAll("path")
+      .data(chartData.features)
+      .enter()
+      .append("path")
+      .attr("d", path)
+      .style("fill", function (d) {
+        return d.properties.color
+      })
+      .on("mouseover", function (d, { properties: { name, votes, population } }) {
+        tooltip.transition()
+          .duration(200)
+          .style("opacity", .9)
+        tooltip.text(`${name} electoral votes: ${votes}`)
+          .style("left", (d.pageX) + "px")
+          .style("top", (d.pageY - 28) + "px")
+        tooltip.append('div')
+          .attr('class', 'population')
+          .text(`People per electoral vote: `)
+          .append('span')
+          .attr('class', 'amount')
+          .text(numeral(population / votes).format('0,0.0'))
+        tooltip.append('div')
+          .attr('class', 'percent')
+          .text(`Percent of a person your vote is worth: `)
+          .append('span')
+          .attr('class', 'amount')
+          .text(numeral((lowestPop / votes) / (population / votes)).format('0.[00]%'))
+        tooltip.append('div')
+          .attr('class', 'worth')
+          .text(`Total people per one person:`)
+          .append('span')
+          .attr('class', 'amount')
+          .text(numeral((population / votes) / (lowestPop / votes)).format('0.[0000]'))
+      })
+      .on("mouseout", function (d) {
+        tooltip.transition()
+          .duration(500)
+          .style("opacity", 0)
+      })
   }
 
   firstUpdated() {
-    this.initChart()
+    this.getChartData().then(() => this.initChart())
   }
-  
+
   connectedCallback() {
     super.connectedCallback()
     window.addEventListener('resize', () => this.initChart())
@@ -226,15 +207,14 @@ export class VoteMap extends LitElement {
 
   render() {
     const {
-      statesData,
-      votesMin,
-      votesMax
+      statesData
     } = this
+
     return html`
       <div class="main">
         <div id="map"></div>
         <ul class="legend">
-          ${statesData.map(([state, votes, color], index) => {
+          ${statesData.map(([state, votes, color]) => {
             return html`
               <li>
                 <span style="background-color:${color}"></span>
@@ -246,7 +226,6 @@ export class VoteMap extends LitElement {
       </div>
     `
   }
-
 }
 
 !window.customElements.get(elementName) && window.customElements.define(elementName, VoteMap)
