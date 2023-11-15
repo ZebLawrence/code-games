@@ -9,7 +9,7 @@ import '@spectrum-web-components/link/sp-link.js'
 import '@spectrum-web-components/sidenav/sp-sidenav.js'
 import '@spectrum-web-components/sidenav/sp-sidenav-item.js'
 import siteConfig from '../site-config'
-import { buildMenu } from './menu'
+import { buildMenu, buildMenuItem } from './menu'
 import codeLogo from '../assets/console.svg'
 import bg1 from '../assets/BG_001.jpg'
 import bg2 from '../assets/BG_002.jpg'
@@ -97,6 +97,41 @@ export class PageTemplate extends LitElement {
       .hide{
         visibility: hidden;
       }
+
+      @media screen and (min-width: 768px){
+        nav sp-action-menu{
+          display: none;
+        }
+      }
+      @media screen and (max-width: 768px){
+        .container{
+          padding-left: 2em;
+          padding-right: 2em;
+        }
+        nav{
+          width: calc(100vw - 4em);
+        }
+        footer{
+          width: calc(100% - 4em);
+        }
+
+        #picker-m, sp-top-nav-item{
+          display: none;
+        }
+
+        nav sp-action-menu{
+          display: block;
+          --swc-menu-width: 100vw;
+        }
+        sp-action-menu sp-link{
+          padding-left: 1em;
+          display: block;
+        }
+
+        sp-menu-divider{
+          width: calc(100vh - 4em);
+        }
+      }
     `
   ]
 
@@ -156,6 +191,28 @@ export class PageTemplate extends LitElement {
                 return html`<sp-top-nav-item href=${path}>${title}</sp-top-nav-item>`
               })}
               ${menus}
+
+              <sp-action-menu
+                  label="Account"
+                  style="margin-inline-start: auto;"
+                  quiet
+              >
+                <sp-menu-divider></sp-menu-divider>
+                <sp-menu-item><span slot="description">Main</span></sp-menu-item>
+                ${main.map(({ path, title }) => {
+                  return html`<sp-link quiet href=${path}>${title}</sp-link>`
+                })}
+                ${Object.entries(groups).map(([name, pages]) => {
+                  return html`
+                    <sp-menu-divider></sp-menu-divider>
+                    <sp-menu-item><span slot="description">${name}</span></sp-menu-item>
+                    ${pages.map(({ path, title }) => {
+                      return html`<sp-link quiet href=${path}>${title}</sp-link>`
+                    })}
+                  `
+                })}
+                <sp-menu-divider></sp-menu-divider>
+              </sp-action-menu>
             </sp-top-nav>
           </nav>
         </header>

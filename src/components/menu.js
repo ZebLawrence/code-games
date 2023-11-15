@@ -17,7 +17,7 @@ export const buildMenu = ([name, pages], index) => {
   return html`              
     <sp-picker style=${index === 0 ? 'margin-inline-start: auto;' : ''} quiet id="picker-m" size="m" >
       <div slot="label">${name}</div>
-      <sp-sidenav defaultValue="Docs">
+      <sp-sidenav>
         ${pages.map(buildMenuItem)}
       </sp-sidenav>
     </sp-picker>

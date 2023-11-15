@@ -84,6 +84,11 @@ export class VoteMap extends LitElement {
       .amount{
         font-weight: bold;
       }
+      @media screen and (max-width: 768px){
+        .legend{
+          display: none;
+        }
+      }
     `
   ]
 
@@ -139,9 +144,14 @@ export class VoteMap extends LitElement {
     mapElement.innerHTML = ''
 
     const { width, height } = mapElement.getBoundingClientRect()
+
+    const scale = width > 738
+      ? width - 500
+      : width
+
     const projection = d3.geoAlbersUsa()
       .translate([width / 2, height / 2])
-      .scale([width - 500])
+      .scale([scale])
     const path = d3.geoPath().projection(projection)
     const svg = d3.select(mapElement)
       .append("svg")

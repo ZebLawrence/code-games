@@ -24,11 +24,11 @@ export default {
   ],
   groups: {
     2020: [
-      home2020,
+      // home2020,
       dayOne2020,
     ],
     2023: [
-      home2023,
+      // home2023,
       dayOne2023,
       dayTwo2023,
     ],
