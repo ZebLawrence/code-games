@@ -4,6 +4,12 @@ export const common = css`
   .d-flex{
     display: flex;
   }
+  .d-flex-grid{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1em;
+  }
   .justify-between{
     justify-content: space-between;
   }

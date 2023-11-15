@@ -63,7 +63,6 @@ export class MyCard extends LitElement {
         :host{
           display: flex;
           flex-basis: ${flexBasis};
-          margin-left: ${marginLeft};
         }
       </style>
       <div class="card">

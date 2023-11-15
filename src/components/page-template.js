@@ -113,6 +113,8 @@ export class PageTemplate extends LitElement {
         }
         footer{
           width: calc(100% - 4em);
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         }
 
         #picker-m, sp-top-nav-item{

@@ -75,7 +75,7 @@ export class DayOne extends PuzzleToggleWithLit {
     }
 
     return html`
-      <div class="d-flex justify-even">
+      <div class="d-flex-grid">
         <my-card width=${25} isFirst>
           ${puzzleSwitcher(selectedPuzzle, puzzles, this.togglePuzzle, dayOne2020.adventUrl)}
         </my-card>
