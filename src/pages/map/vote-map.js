@@ -34,6 +34,7 @@ export class VoteMap extends LitElement {
       }
       svg {
         z-index: 0;
+        filter: drop-shadow(20px 20px 10px black);
       }
       path {
         z-index: 1;
@@ -58,6 +59,7 @@ export class VoteMap extends LitElement {
         color: #000;
         transition: all 0.25s;
         translate: -75% -150%;
+        box-shadow: rgb(0, 0, 0) 0px 5px 5px 0px;
       }
       .legend {
         background: #FFF;
