@@ -31,10 +31,10 @@ export class VoteMap extends LitElement {
         height: 100%;
         z-index: 0;
         transition: all 0.25s;
+        filter: drop-shadow(20px 20px 10px black);
       }
       svg {
         z-index: 0;
-        filter: drop-shadow(20px 20px 10px black);
       }
       path {
         z-index: 1;
@@ -76,6 +76,11 @@ export class VoteMap extends LitElement {
         line-height: 0.75em;
         font-size: 0.75em;
         padding: 0.1em;
+        transition: font-size 0.25s;
+        cursor: pointer;
+      }
+      .legend li:hover{
+        font-size: 1em;
       }
       .legend li span{
         display: inline-block;
@@ -156,29 +161,32 @@ export class VoteMap extends LitElement {
       .scale([scale])
     const path = d3.geoPath().projection(projection)
     const svg = d3.select(mapElement)
-      .append("svg")
-      .attr("width", '100%')
-      .attr("height", '100%')
+      .append('svg')
+      .attr('width', '100%')
+      .attr('height', '100%')
     const tooltip = d3.select(mapElement)
-      .append("div")
-      .attr("class", "tooltip")
-      .style("opacity", 0)
+      .append('div')
+      .attr('class', 'tooltip')
+      .style('opacity', 0)
 
-    svg.selectAll("path")
+    svg.selectAll('path')
       .data(chartData.features)
       .enter()
-      .append("path")
-      .attr("d", path)
-      .style("fill", function (d) {
+      .append('path')
+      .attr('d', path)
+      .attr('id', function ({ properties: { name } }) {
+        return name  
+      })
+      .style('fill', function (d) {
         return d.properties.color
       })
-      .on("mouseover", function (d, { properties: { name, votes, population } }) {
+      .on('mouseover', function (d, { properties: { name, votes, population } }) {
         tooltip.transition()
           .duration(200)
-          .style("opacity", .9)
+          .style('opacity', .9)
         tooltip.text(`${name} electoral votes: ${votes}`)
-          .style("left", (d.pageX) + "px")
-          .style("top", (d.pageY - 28) + "px")
+          .style('left', (d.pageX) + 'px')
+          .style('top', (d.pageY - 28) + 'px')
         tooltip.append('div')
           .attr('class', 'population')
           .text(`People per electoral vote: `)
@@ -198,10 +206,10 @@ export class VoteMap extends LitElement {
           .attr('class', 'amount')
           .text(numeral((population / votes) / (lowestPop / votes)).format('0.[0000]'))
       })
-      .on("mouseout", function (d) {
+      .on('mouseout', function (d) {
         tooltip.transition()
           .duration(500)
-          .style("opacity", 0)
+          .style('opacity', 0)
       })
   }
 
@@ -220,7 +228,7 @@ export class VoteMap extends LitElement {
   }
 
   handleMouseOver(event) {
-    const { currentTarget, clientX, clientY } = event
+    let { currentTarget, clientX, clientY } = event
 
     const centerX = currentTarget.offsetLeft + currentTarget.offsetWidth / 2
     const centerY = currentTarget.offsetTop + currentTarget.offsetHeight / 2
@@ -229,6 +237,18 @@ export class VoteMap extends LitElement {
     const tiltY = (centerY - clientY) / 30
 
     currentTarget.style.transform = `perspective(1000px) rotateX(${(tiltY * -1)}deg) rotateY(${(tiltX)}deg)`
+    currentTarget.style.filter = `drop-shadow(${tiltX * -1}px ${tiltY * -1}px 10px black)`
+  }
+
+  handleLegendMouseOver(id) {
+    const state = this.shadowRoot.getElementById(id)
+    const tooltip = this.shadowRoot.querySelector('.tooltip')
+    const { x, y } = state.getBoundingClientRect()
+    tooltip.style.opacity = 1
+    tooltip.style.left = `${x}px`
+    tooltip.style.top = `${y}px`
+    tooltip.style.translate = `-50% -100%`
+    state.dispatchEvent(new Event('mouseover'))
   }
 
   render() {
@@ -242,7 +262,7 @@ export class VoteMap extends LitElement {
         <ul class="legend">
           ${statesData.map(([state, votes, color]) => {
             return html`
-              <li>
+              <li @mouseenter=${() => this.handleLegendMouseOver(state)}>
                 <span style="background-color:${color}"></span>
                 ${state}: ${votes}
               </li>
