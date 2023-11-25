@@ -1,11 +1,6 @@
-import { css, html } from 'lit'
-import '../../components/my-card'
-import { timeTaken } from '../../components/time-taken'
-import { badge } from '../../components/my-badge'
-import { common } from '../../assets/common'
-import { puzzleSwitcher } from '../../components/puzzle-switcher'
+import { html } from 'lit'
 import { PuzzleToggleWithLit } from '../../mixins/puzzleToggle'
-import { examplePuzzle, exampleAnswer, fullPuzzle } from './puzzles/2020-12-1-puzzle'
+import { examplePuzzle, fullPuzzle } from './puzzles/2020-12-1-puzzle'
 
 /* playground-hide */
 const elementName = 'day-one-two-zero'
@@ -24,7 +19,7 @@ export class DayOne extends PuzzleToggleWithLit {
     ...super.properties,
   }
   
-  static styles = [common]
+  static styles = [...super.styles]
   
   parseInput(raw) {
     return raw.split('\n').map(Number)
@@ -39,9 +34,7 @@ export class DayOne extends PuzzleToggleWithLit {
   
   render() {
     const {
-      puzzles,
-      puzzle,
-      selectedPuzzle,
+      puzzle
     } = this
 
     let pair2020 = []
@@ -76,23 +69,23 @@ export class DayOne extends PuzzleToggleWithLit {
 
     return html`
       <div class="d-flex-grid">
-        <my-card width=${25} isFirst>
-          ${puzzleSwitcher(selectedPuzzle, puzzles, this.togglePuzzle, dayOne2020.adventUrl)}
+        <my-card>
+          ${this.puzzleSwitcher(dayOne2020.adventUrl)}
         </my-card>
         <my-card label="Part 1">
-          ${badge('Pair found')}
+          ${this.badge('Pair found')}
           <pre>${JSON.stringify(pair2020, null, 2)}</pre>
-          ${badge('Total')}
+          ${this.badge('Total')}
           <pre>${totalPart1}</pre>
         </my-card>
         <my-card label="Part 2">
-          ${badge('Three found')}
+          ${this.badge('Three found')}
           <pre>${JSON.stringify(three2020, null, 2)}</pre>
-          ${badge('Total')}
+          ${this.badge('Total')}
           <pre>${totalPart2}</pre>
         </my-card>
       </div>
-      ${timeTaken(this.startTime)}
+      ${this.timeTaken(this.startTime)}
     `
   }
 

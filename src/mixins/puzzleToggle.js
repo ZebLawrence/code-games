@@ -1,4 +1,9 @@
 import { LitElement } from "lit";
+import { common } from '../assets/common'
+import { timeTaken } from '../components/time-taken'
+import { badge } from '../components/my-badge'
+import { puzzleSwitcher } from '../components/puzzle-switcher'
+import '../components/my-card'
 
 export const PuzzleToggle = (superClass) => {
   class PuzzleToggleElement extends superClass {
@@ -8,6 +13,8 @@ export const PuzzleToggle = (superClass) => {
       puzzle: { state: true, type: Object },
       title: { type: String },
     };
+
+    static styles = [common]
 
     togglePuzzle({ currentTarget }) {
       const { value } = currentTarget
@@ -19,13 +26,27 @@ export const PuzzleToggle = (superClass) => {
       this.puzzle = []
       this.puzzles = puzzles
       this.selectedPuzzle = 'examplePuzzle'
+      this.startTime = performance.now()
+    }
+
+    timeTaken() {
+      return timeTaken(this.startTime)
+    }
+
+    badge(label) {
+      return badge(label)
+    }
+
+    puzzleSwitcher(url) {
+      const { puzzles, selectedPuzzle, togglePuzzle } = this
+      return puzzleSwitcher(selectedPuzzle, puzzles, togglePuzzle, url)
     }
 
     updated(updates) {
       super.updated(updates)
-      const { puzzle, parseInput, puzzles, selectedPuzzle } = this
-      if (updates.has('selectedPuzzle')) {
-        this.startTime = performance.now();
+      const { parseInput, puzzles, selectedPuzzle } = this
+      if (updates.has('selectedPuzzle') && parseInput) {
+        this.startTime = performance.now()
         this.puzzle = parseInput(puzzles[selectedPuzzle])
       }
     }
