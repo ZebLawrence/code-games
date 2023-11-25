@@ -1,15 +1,11 @@
 import { LitElement, css, html } from 'lit'
 import '@spectrum-web-components/top-nav/sp-top-nav.js'
 import '@spectrum-web-components/top-nav/sp-top-nav-item.js'
-import '@spectrum-web-components/action-menu/sync/sp-action-menu.js'
-import '@spectrum-web-components/menu/sp-menu-item.js'
-import '@spectrum-web-components/menu/sp-menu-divider.js'
 import '@spectrum-web-components/picker/sp-picker.js'
 import '@spectrum-web-components/link/sp-link.js'
-import '@spectrum-web-components/sidenav/sp-sidenav.js'
-import '@spectrum-web-components/sidenav/sp-sidenav-item.js'
+
 import siteConfig from '../site-config'
-import { buildMenu, buildMenuItem } from './menu'
+import { buildMenu, linkMenuItem, linkMenuGroup, topNavLink } from './menu'
 import codeLogo from '../assets/console.svg'
 import bg1 from '../assets/BG_001.jpg'
 import bg2 from '../assets/BG_002.jpg'
@@ -98,8 +94,16 @@ export class PageTemplate extends LitElement {
         visibility: hidden;
       }
 
+      .mobile-menu{
+        margin-inline-start: auto;
+      }
+
+      .mobile-menu sp-menu-item{
+        margin-top: 0.5em;
+      }
+
       @media screen and (min-width: 768px){
-        nav sp-action-menu{
+        nav .mobile-menu{
           display: none;
         }
       }
@@ -119,19 +123,6 @@ export class PageTemplate extends LitElement {
 
         #picker-m, sp-top-nav-item{
           display: none;
-        }
-
-        nav sp-action-menu{
-          display: block;
-          --swc-menu-width: 100vw;
-        }
-        sp-action-menu sp-link{
-          padding-left: 1em;
-          display: block;
-        }
-
-        sp-menu-divider{
-          width: calc(100vh - 4em);
         }
       }
     `
@@ -189,32 +180,18 @@ export class PageTemplate extends LitElement {
           <nav>
             <sp-top-nav>
               <h1><img class="logo" src=${codeLogo} alt="console prompt graphic"/></h1>
-              ${main.map(({ path, title }) => {
-                return html`<sp-top-nav-item href=${path}>${title}</sp-top-nav-item>`
-              })}
+              ${main.map(topNavLink)}
               ${menus}
-
-              <sp-action-menu
-                  label="Account"
-                  style="margin-inline-start: auto;"
-                  quiet
-              >
-                <sp-menu-divider></sp-menu-divider>
-                <sp-menu-item><span slot="description">Main</span></sp-menu-item>
-                ${main.map(({ path, title }) => {
-                  return html`<sp-link quiet href=${path}>${title}</sp-link>`
-                })}
-                ${Object.entries(groups).map(([name, pages]) => {
-                  return html`
-                    <sp-menu-divider></sp-menu-divider>
-                    <sp-menu-item><span slot="description">${name}</span></sp-menu-item>
-                    ${pages.map(({ path, title }) => {
-                      return html`<sp-link quiet href=${path}>${title}</sp-link>`
-                    })}
-                  `
-                })}
-                <sp-menu-divider></sp-menu-divider>
-              </sp-action-menu>
+              <!-- Mobile Menu -->
+              <overlay-trigger class="mobile-menu" type="modal">
+                <sp-button slot="trigger" variant="secondary">Menu</sp-button>
+                <sp-tray slot="click-content">
+                  <sp-dialog size="l">
+                    ${main.map(linkMenuItem)}
+                    ${Object.entries(groups).map(linkMenuGroup)}
+                  </sp-dialog>
+                </sp-tray>
+              </overlay-trigger>
             </sp-top-nav>
           </nav>
         </header>

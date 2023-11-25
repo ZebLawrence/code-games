@@ -148,17 +148,14 @@ export class VoteMap extends LitElement {
       lowestPop
     } = this
     const mapElement = this.shadowRoot.getElementById('map')
+    const { width, height } = mapElement.getBoundingClientRect()
     mapElement.innerHTML = ''
 
-    const { width, height } = mapElement.getBoundingClientRect()
-
-    const scale = width > 738
-      ? width - 500
-      : width
-
     const projection = d3.geoAlbersUsa()
-      .translate([width / 2, height / 2])
-      .scale([scale])
+      .translate([width, height])
+      .fitExtent([[(width * 0.1), (height * 0.1)],[(width * 0.8), (height * 0.9)]], chartData)
+      //.fitSize([(width * 0.95), (height * 0.95)], chartData)
+      //.scale([scale])
     const path = d3.geoPath().projection(projection)
     const svg = d3.select(mapElement)
       .append('svg')
@@ -233,8 +230,8 @@ export class VoteMap extends LitElement {
     const centerX = currentTarget.offsetLeft + currentTarget.offsetWidth / 2
     const centerY = currentTarget.offsetTop + currentTarget.offsetHeight / 2
 
-    const tiltX = (centerX - clientX) / 30
-    const tiltY = (centerY - clientY) / 30
+    const tiltX = (centerX - clientX) / (currentTarget.offsetWidth * 0.046)
+    const tiltY = (centerY - clientY) / (currentTarget.offsetHeight * 0.046)
 
     currentTarget.style.transform = `perspective(1000px) rotateX(${(tiltY * -1)}deg) rotateY(${(tiltX)}deg)`
     currentTarget.style.filter = `drop-shadow(${tiltX * -1}px ${tiltY * -1}px 10px black)`
