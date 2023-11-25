@@ -26,6 +26,24 @@ import bg16 from '../assets/BG_016.jpg'
 import bg17 from '../assets/BG_017.jpg'
 import bg18 from '../assets/BG_018.jpg'
 import bg19 from '../assets/BG_019.jpg'
+import bg20 from '../assets/BG_020.jpg'
+import bg21 from '../assets/BG_021.jpg'
+import bg22 from '../assets/BG_022.jpg'
+import bg23 from '../assets/BG_023.jpg'
+import bg24 from '../assets/BG_024.jpg'
+import bg25 from '../assets/BG_025.jpg'
+import bg26 from '../assets/BG_026.jpg'
+import bg27 from '../assets/BG_027.jpg'
+import bg28 from '../assets/BG_028.jpg'
+import bg29 from '../assets/BG_029.jpg'
+import bg30 from '../assets/BG_030.jpg'
+import bg31 from '../assets/BG_031.jpg'
+import bg32 from '../assets/BG_032.jpg'
+import bg33 from '../assets/BG_033.jpg'
+import bg34 from '../assets/BG_034.jpg'
+import bg35 from '../assets/BG_035.jpg'
+import bg36 from '../assets/BG_036.jpg'
+import bg37 from '../assets/BG_037.jpg'
 import './my-playground'
 
 export class PageTemplate extends LitElement {
@@ -153,6 +171,24 @@ export class PageTemplate extends LitElement {
       bg17,
       bg18,
       bg19,
+      bg20,
+      bg21,
+      bg22,
+      bg23,
+      bg24,
+      bg25,
+      bg26,
+      bg27,
+      bg28,
+      bg29,
+      bg30,
+      bg31,
+      bg32,
+      bg33,
+      bg34,
+      bg35,
+      bg36,
+      bg37,
     ]
   }
 
@@ -171,7 +207,7 @@ export class PageTemplate extends LitElement {
       main,
       groups
     } = siteConfig
-    const bgIndex = Math.floor(Math.random() * 19)
+    const bgIndex = Math.floor(Math.random() * backgrounds.length)
     const menus = Object.entries(groups).map(buildMenu)
 
     return html`
