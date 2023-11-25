@@ -30,7 +30,7 @@ import './my-playground'
 
 export class PageTemplate extends LitElement {
   static properties = {
-    title: { type: String },
+    pageTitle: { type: String },
     codeFileName: { type: String },
     adventUrl: { type: String },
   }
@@ -130,7 +130,7 @@ export class PageTemplate extends LitElement {
 
   constructor() {
     super()
-    this.title = 'Some Code'
+    this.pageTitle = 'Some Code'
     this.codeFileName = null
     this.adventUrl = null
     this.backgrounds = [
@@ -156,9 +156,9 @@ export class PageTemplate extends LitElement {
     ]
   }
 
-  firstUpdated() {
-    super.firstUpdated()
-    document.title = this.title
+  updated(updated) {
+    super.updated(updated)
+    document.title = `>_ Code Games: ${this.pageTitle}`
   }
 
   render() {
