@@ -236,7 +236,7 @@ export class PageTemplate extends LitElement {
           <my-playground codeFileName=${codeFileName}></my-playground>
           ${adventUrl && html`<sp-link quiet target="_blank" href=${adventUrl}>This Puzzle</sp-link>`}
           <div class="links">
-            <sp-link quiet target="_blank" href="https://adventofcode.com/2022/leaderboard/private/view/1083410">Private Leaderboard</sp-link>
+            <sp-link quiet target="_blank" href="https://adventofcode.com/2023/leaderboard/private/view/1083410">Private Leaderboard</sp-link>
             <sp-link quiet target="_blank" href="https://adventofcode.com/2020">2020</sp-link>
             <sp-link quiet target="_blank" href="https://adventofcode.com/2021">2021</sp-link>
             <sp-link quiet target="_blank" href="https://adventofcode.com/2022">2022</sp-link>
