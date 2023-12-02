@@ -1,6 +1,6 @@
 import { css, html } from 'lit'
-import { PuzzleToggleWithLit } from '../../mixins/puzzleToggle'
-import { examplePuzzle, fullPuzzle } from './puzzles/2023-12-1-puzzle'
+import { PuzzleToggleWithLit } from '../../../mixins/puzzleToggle'
+import { examplePuzzle, fullPuzzle } from './2023-12-2-puzzle'
 /* playground-hide */
 const elementName = 'day-two-two-three'
 export const dayTwo2023 = {

@@ -1,5 +1,11 @@
 
-export const examplePuzzle = `1abc2
+export const partOneExpectedTotal = 142
+export const partTwoExpectedTotal = 281
+export const expectedPartOneCalibration = [12, 38, 15, 77]
+export const expectedPartTwoCalibration = [29, 83, 13, 24, 42, 14, 76]
+export const numbersNames = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+
+export const examplePartOne = `1abc2
 pqr3stu8vwx
 a1b2c3d4e5f
 treb7uchet`
@@ -11,10 +17,6 @@ xtwone3four
 4nineeightseven2
 zoneight234
 7pqrstsixteen`
-
-export const exampleAnswer = 142
-
-export const numbersNames = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
 
 export const fullPuzzle = `four9one
 bbzhsmnmtf8kftwosevenxfkssgrcjthree

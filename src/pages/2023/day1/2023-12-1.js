@@ -1,6 +1,15 @@
 import { css, html } from 'lit'
-import { PuzzleToggleWithLit } from '../../mixins/puzzleToggle'
-import { examplePuzzle, fullPuzzle, numbersNames, examplePartTwo } from './puzzles/2023-12-1-puzzle'
+import { PuzzleToggleWithLit } from '../../../mixins/puzzleToggle'
+import {
+  examplePartOne,
+  fullPuzzle,
+  numbersNames,
+  examplePartTwo,
+  partOneExpectedTotal,
+  expectedPartOneCalibration,
+  partTwoExpectedTotal,
+  expectedPartTwoCalibration
+} from './2023-12-1-puzzle'
 
 /* playground-hide */
 const elementName = 'day-one-two-three'
@@ -26,11 +35,11 @@ export class DayOne extends PuzzleToggleWithLit {
   
   constructor() {
     super({
-      examplePuzzle,
+      examplePartOne,
       examplePartTwo,
       fullPuzzle
     })
-    this.selectedPuzzle = 'examplePartTwo'
+    this.selectedPuzzle = 'examplePartOne'
   }
   
   parseInput(input) {
@@ -41,6 +50,7 @@ export class DayOne extends PuzzleToggleWithLit {
   render() {
     const {
       startTime,
+      isPart2
     } = this
 
     const addNumbers = (numbers) => {
@@ -78,20 +88,22 @@ export class DayOne extends PuzzleToggleWithLit {
           return
         }
 
-        // check if one of the names is in the left side
-        numbersNames.forEach((name, index) => {
-          if (leftSide.includes(name) && leftNumber === 0) {
-            leftNumber = index
+        if(isPart2) {
+          // check if one of the names is in the left side
+          numbersNames.forEach((name, index) => {
+            if (leftSide.includes(name) && leftNumber === 0) {
+              leftNumber = index
+            }
+            if (rightSide.includes(name) && rightNumber === 0) {
+              rightNumber = index
+            }
+          })
+  
+          // break out if we have it
+          if (leftNumber !== 0 && rightNumber !== 0) {
+            calibrationNumbers.push(Number(`${leftNumber}${rightNumber}`))
+            return
           }
-          if (rightSide.includes(name) && rightNumber === 0) {
-            rightNumber = index
-          }
-        })
-
-        // break out if we have it
-        if (leftNumber !== 0 && rightNumber !== 0) {
-          calibrationNumbers.push(Number(`${leftNumber}${rightNumber}`))
-          return
         }
 
         pointer++
@@ -103,18 +115,31 @@ export class DayOne extends PuzzleToggleWithLit {
     }
 
     return html`
-      <my-card>
-        ${this.puzzleSwitcher(dayOne2023.adventUrl)}
+      <my-card >
+        <div class="d-flex space-between">
+          <div>
+            ${this.puzzleSwitcher(dayOne2023.adventUrl)}
+          </div>
+          <div>
+            <sp-button size="s" quiet @click=${this.togglePart}>Toggle Part</sp-button>
+          </div>
+          <div>Expected total part 1: ${partOneExpectedTotal}</div>
+          <div>Expected total part 2: ${partTwoExpectedTotal}</div>
+        </div>
       </my-card>
       <my-card>
-        The total Part Two calibration is: ${totalPartOne}
+        ${isPart2
+          ? html`<div>The total Part 2 calibration is: ${totalPartOne}</div>`
+          : html`<div>The total Part 1 calibration is: ${totalPartOne}</div>`
+        }
       </my-card>
       <my-card>
         <table>
           <thead>
             <tr>
               <th>RAW</th>
-              <th>final</th>
+              <th>Final</th>
+              <th>Expected</th>
             </tr>
           </thead>
           <tbody>
@@ -123,6 +148,9 @@ export class DayOne extends PuzzleToggleWithLit {
                 <tr>
                   <td>${this.puzzle[index]}</td>
                   <td>${calibrationNumbers[index]}</td>
+                  ${isPart2
+                    ? html `<td>${expectedPartTwoCalibration[index]}</td>`
+                    : html`<td>${expectedPartOneCalibration[index]}</td>`}
                 </tr>
               `
             })}

@@ -31,7 +31,13 @@ export class HomePageTwoThree extends LitElement {
       title
     } = this
     return html`
-      <div class="card">${title}</div>
+      <div class="card">
+        <h1>${title}</h1>
+        <ul>
+          <li><sp-link href="#/2023/day-one/">Day One</sp-link></li>
+          <li><sp-link href="#/2023/day-two/">Day Two</sp-link></li>
+        </ul>
+      </div>
     `
   }
 

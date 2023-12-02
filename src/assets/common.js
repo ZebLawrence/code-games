@@ -4,6 +4,13 @@ export const common = css`
   .d-flex{
     display: flex;
   }
+  .space-between{
+    justify-content: space-between;
+  }
+  .grid{
+    display: grid;
+    gap: 1em;
+  }
   .d-flex-grid{
     width: 100%;
     display: grid;
@@ -38,4 +45,13 @@ export const common = css`
     -webkit-box-shadow: 0px 0px 0.3em 0.3em rgba(0,0,0,0.25);
     -moz-box-shadow: 0px 0px 0.3em 0.3em rgba(0,0,0,0.25);
   }
+  table{
+    // width: 50%;
+  }
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 0.5em;
+  }
+
 `

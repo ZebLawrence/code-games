@@ -1,6 +1,6 @@
 import { html } from 'lit'
-import { PuzzleToggleWithLit } from '../../mixins/puzzleToggle'
-import { examplePuzzle, fullPuzzle } from './puzzles/2020-12-1-puzzle'
+import { PuzzleToggleWithLit } from '../../../mixins/puzzleToggle'
+import { examplePuzzle, fullPuzzle } from './2020-12-1-puzzle'
 
 /* playground-hide */
 const elementName = 'day-one-two-zero'

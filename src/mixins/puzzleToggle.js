@@ -12,6 +12,7 @@ export const PuzzleToggle = (superClass) => {
       puzzles: { state: true, type: Object },
       puzzle: { state: true, type: Object },
       title: { type: String },
+      isPart2: { state: true, type: Boolean },
     };
 
     static styles = [common]
@@ -21,11 +22,16 @@ export const PuzzleToggle = (superClass) => {
       this.selectedPuzzle = value
     }
 
+    setSelectedPuzzle(puzzle) {
+      this.selectedPuzzle = puzzle
+    }
+
     constructor(puzzles) {
       super();
       this.puzzle = []
       this.puzzles = puzzles
       this.selectedPuzzle = 'examplePuzzle'
+      this.isPart2 = false
       this.startTime = performance.now()
     }
 
@@ -40,6 +46,10 @@ export const PuzzleToggle = (superClass) => {
     puzzleSwitcher(url) {
       const { puzzles, selectedPuzzle, togglePuzzle } = this
       return puzzleSwitcher(selectedPuzzle, puzzles, togglePuzzle, url)
+    }
+
+    togglePart() {
+      this.isPart2 = !this.isPart2
     }
 
     updated(updates) {
