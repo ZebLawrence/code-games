@@ -1,5 +1,6 @@
 import { css, html } from 'lit'
 import { PuzzleToggleWithLit } from '../../../mixins/puzzleToggle'
+import { addNumbers } from '../../../utils/mathHelp'
 import {
   examplePartOne,
   fullPuzzle,
@@ -52,12 +53,6 @@ export class DayOne extends PuzzleToggleWithLit {
       startTime,
       isPart2
     } = this
-
-    const addNumbers = (numbers) => {
-      return numbers.reduce((acc, number) => {
-        return acc + number
-      })
-    }
 
     const calibrationNumbers = []
     let totalPartOne = 0
@@ -138,7 +133,7 @@ export class DayOne extends PuzzleToggleWithLit {
           <thead>
             <tr>
               <th>RAW</th>
-              <th>Final</th>
+              <th>Result</th>
               <th>Expected</th>
             </tr>
           </thead>

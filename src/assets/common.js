@@ -54,4 +54,26 @@ export const common = css`
     padding: 0.5em;
   }
 
+  .valid{
+    background-color: #00cc0014;
+  }
+
+  .invalid{
+    background-color: #cc00000f;
+  }
+
+  .total{
+    background-color: #8fc9fc28;
+  }
+
+  .red{
+    background-color: #cc00006a;
+  }
+
+  .blue{
+    background-color: #0000cc7a;
+  }
+  .green{
+    background-color: #00cc0083;
+  }
 `
