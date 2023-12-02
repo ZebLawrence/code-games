@@ -1,4 +1,5 @@
 import { LitElement, css, html } from 'lit'
+import siteConfig from '../../site-config'
 
 const elementName = 'home-page-twozero'
 
@@ -34,7 +35,7 @@ export class HomePageTwoZero extends LitElement {
       <div class="card">
         <h1>${title}</h1>
         <ul>
-          <li><sp-link href="#/2020/day-one/">Day One</sp-link></li>
+        ${siteConfig.groups['2020'].map(({ title, path }) => html`<li><sp-link href=${path}>${title}</sp-link></li>`)}
         </ul>
       </div>
     `

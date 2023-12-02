@@ -1,4 +1,5 @@
 import { LitElement, css, html } from 'lit'
+import siteConfig from '../../site-config'
 
 const elementName = 'home-page-two-three'
 
@@ -34,8 +35,7 @@ export class HomePageTwoThree extends LitElement {
       <div class="card">
         <h1>${title}</h1>
         <ul>
-          <li><sp-link href="#/2023/day-one/">Day One</sp-link></li>
-          <li><sp-link href="#/2023/day-two/">Day Two</sp-link></li>
+          ${siteConfig.groups['2023'].map(({ title, path }) => html`<li><sp-link href=${path}>${title}</sp-link></li>`)}
         </ul>
       </div>
     `
