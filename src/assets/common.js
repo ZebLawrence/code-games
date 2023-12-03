@@ -76,4 +76,7 @@ export const common = css`
   .green{
     background-color: #00cc0083;
   }
+  .black{
+    background-color: #0000006c;
+  }
 `

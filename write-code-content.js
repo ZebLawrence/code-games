@@ -1,8 +1,7 @@
 import fs from 'fs'
 import path from 'path'
-import config from './playground.config.json' assert { type: "json" };
+import config from './playground.config.json' assert { type: "json" }
 
-const CURR_DIR = process.cwd()
 /**
  * Recurses directories to find the files that match the reg ex filter
  * @param {string} startPath 
@@ -27,9 +26,8 @@ const recurseDir = (startPath, filter, callback) => {
       callback(filename)
     }
   }
-};
+}
 
-console.log('the config to parse', config)
 const { files } = config
 
 Object.entries(files).forEach(([fileName, fileProps]) => {
@@ -43,7 +41,6 @@ Object.entries(files).forEach(([fileName, fileProps]) => {
       fileProps.content = fileContent
     }
   })
-});
+})
 
-console.log('The updated config', config)
 fs.writeFileSync(`public/playground.config.json`, JSON.stringify(config))

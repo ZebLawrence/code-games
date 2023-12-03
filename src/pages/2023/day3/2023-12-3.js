@@ -25,8 +25,16 @@ export class DayThree extends PuzzleToggleWithLit {
   static styles = [
     ...super.styles,
     css`
-      td{
-        font-size: .5em
+      .table-container td{
+        font-size: .5em;
+        padding: 0;
+        text-align: center;
+        width: 10px;
+        height: 10px;
+        font-weight: bold;
+      }
+      .table-container td.green, .table-container td.red{
+        border: none;
       }
       .table-container{
         padding-right: 2em;
@@ -180,11 +188,18 @@ export class DayThree extends PuzzleToggleWithLit {
     totalValidPartNumbers = validPartNumbers.length && addNumbers(validPartNumbers)
     totalGearRatios = gearRatiosMultiplied.length && addNumbers(gearRatiosMultiplied)
 
-
     return html`
       <my-card>
         <div class="d-flex-grid justify-between">
           ${this.puzzleSwitcher(dayThree2023.adventUrl)}
+          <div>
+            <ul>
+              <li class="green">Valid Part Number touching symbol</li>
+              <li class="red">Invalid Part Number</li>
+              <li class="blue">⚙️ gear connecting part numbers</li>
+              <li>🔧 Symbol</li>
+            </ul>
+          </div>
         </div>
       </my-card>
       <my-card>
@@ -204,12 +219,26 @@ export class DayThree extends PuzzleToggleWithLit {
                       const coords = `${rowIndex},${colIndex}`
                       const isAdjacent = adjacentCoordsMap[coords] === true
                       const isGear = gearMap[coords] && gearMap[coords].length > 1
+                      let display = char
+
+                      switch (char) {
+                        case '*':
+                          display = isGear ? '⚙️': '🔧'
+                          break;
+                        case '.':
+                          display = ''
+                          break;
+                        default:
+                          display = isNaN(char) ? '🔧' : char
+                      }
+
                       return html`
                         <td class=${classMap({
                           'green': isAdjacent,
                           'blue': isGear,
+                          'red': !isNaN(char) && !isAdjacent 
                         })}>
-                          ${char === '*' ? '⚙️' : char}
+                          ${display}
                         </td>
                       `
                     })}
