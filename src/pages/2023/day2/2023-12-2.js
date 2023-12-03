@@ -25,15 +25,9 @@ export class DayTwo extends PuzzleToggleWithLit {
   static styles = [
     ...super.styles,
     css`
-      table{
-        width: 100%;
-        text-align: center;
-      }
-      td{
-        flex-wrap: wrap;
-      }
-      sp-badge{
-        min-width: 31px;
+      .small-shadow{
+        min-width: 25px;
+        border-radius: 5px;
       }
     `
   ]
@@ -129,55 +123,61 @@ export class DayTwo extends PuzzleToggleWithLit {
         </div>
       </my-card>
       <my-card>
-        <table>
-          <thead>
-            <th>Game</th>
-            <th>Impossible</th>
-            <th>Possible</th>
-            <th>Power Score</th>
-            <th>Draws</th>
-          </thead>
-          <tbody>
-            ${allGames.map(game => {
-              const invalid = invalidGames.indexOf(game) !== -1
-              const valid = possibleGames.indexOf(game) !== -1
-              const gamePower = gamePowers[game - 1]
-              const { draws } = this.puzzle[game]
-
-              return html`
-                <tr class=${classMap({ valid, invalid })}>
-                  <td>${game}</td>
-                  <td>${invalid ? `Impossible ${game}` : ''}</td>
-                  <td>${valid ? `Possible ${game}` : ''}</td>
-                  <td>${gamePower}</td>
-                  <td>
-                    ${draws.map(draw => {
-                      return html`
-                        <div class="d-flex">
-                          ${Object.entries(draw).map(([color, count]) => {
-                            return html`
-                              <div class="d-flex">
-                                ${Array(count).fill().map((_, i) => {
-                                  return html`<sp-badge size="s" class="small-shadow ${color}">${i + 1}</sp-badge>`
-                                })}
-                              </div>
-                            `
-                          })}
-                        </div>
-                      `
-                    })}
-                  </td>
-                </tr>
-              `
-            })}
-            <tr class="total">
-              <td>Total</td>
-              <td>${totalInvalidScore}</td>
-              <td>${totalPossibleScore}</td>
-              <td>${totalGamePowers}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr  class="total">
+                <th>Game</th>
+                <th>Impossible</th>
+                <th>Possible</th>
+                <th>Power Score</th>
+                <th>Draws</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${allGames.map(game => {
+                const invalid = invalidGames.indexOf(game) !== -1
+                const valid = possibleGames.indexOf(game) !== -1
+                const gamePower = gamePowers[game - 1]
+                const { draws } = this.puzzle[game]
+  
+                return html`
+                  <tr class=${classMap({ valid, invalid })}>
+                    <td>${game}</td>
+                    <td>${invalid ? `Impossible ${game}` : ''}</td>
+                    <td>${valid ? `Possible ${game}` : ''}</td>
+                    <td>${gamePower}</td>
+                    <td>
+                      ${draws.map((draw, index) => {
+                        return html`
+                          <div class="d-flex">
+                            <span class="mr-1">Draw: ${index + 1}</span>
+                            ${Object.entries(draw).map(([color, count]) => {
+                              return html`
+                                <div class="d-flex">
+                                  ${Array(count).fill().map((_, i) => {
+                                    return html`<div class="small-shadow ${color}">${i + 1}</div>`
+                                  })}
+                                </div>
+                              `
+                            })}
+                          </div>
+                        `
+                      })}
+                    </td>
+                  </tr>
+                `
+              })}
+              <tr class="total">
+                <td>Total</td>
+                <td>${totalInvalidScore}</td>
+                <td>${totalPossibleScore}</td>
+                <td>${totalGamePowers}</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </my-card>
       ${this.timeTaken(startTime)}
     `

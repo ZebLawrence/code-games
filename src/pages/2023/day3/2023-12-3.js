@@ -36,11 +36,6 @@ export class DayThree extends PuzzleToggleWithLit {
       .table-container td.green, .table-container td.red{
         border: none;
       }
-      .table-container{
-        padding-right: 2em;
-        padding-bottom: 2em;
-        overflow-x: auto;
-      }
     `
   ]
 

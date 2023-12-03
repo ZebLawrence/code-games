@@ -29,6 +29,12 @@ export const common = css`
   .mt-1{
     margin-top: 1em;
   }
+  .mr-2{
+    margin-right: 2em;
+  }
+  .mr-1{
+    margin-right: 1em;
+  }
   .h-100{
     height: 100%;
   }
@@ -46,7 +52,12 @@ export const common = css`
     -moz-box-shadow: 0px 0px 0.3em 0.3em rgba(0,0,0,0.25);
   }
   table{
-    // width: 50%;
+    text-align: center;
+  }
+  .table-container{
+    padding-right: 2em;
+    padding-bottom: 2em;
+    overflow-x: auto;
   }
   table, th, td {
     border: 1px solid black;
@@ -63,7 +74,7 @@ export const common = css`
   }
 
   .total{
-    background-color: #8fc9fc28;
+    background-color: #8fc9fc0f;
   }
 
   .red{
