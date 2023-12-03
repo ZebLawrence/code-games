@@ -16,6 +16,11 @@ export class TypeCode extends LitElement {
         color: #00cc00;
         text-shadow: 0 0 2px #00cc00, 0 0 5px #00cc00;
         backdrop-filter: blur(10px);
+        white-space: pre-wrap;       /* css-3 */
+        white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+        white-space: -pre-wrap;      /* Opera 4-6 */
+        white-space: -o-pre-wrap;    /* Opera 7 */
+        word-wrap: break-word;   
       }
     `,
   ]
