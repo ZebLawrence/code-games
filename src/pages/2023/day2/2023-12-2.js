@@ -1,5 +1,6 @@
 import { css, html } from 'lit'
 import { classMap } from 'lit/directives/class-map.js'
+import numeral from 'numeral'
 import { PuzzleToggleWithLit } from '../../../mixins/puzzleToggle'
 import { addNumbers } from '../../../utils/mathHelp'
 import {
@@ -146,7 +147,7 @@ export class DayTwo extends PuzzleToggleWithLit {
                     <td>${game}</td>
                     <td>${invalid ? `Impossible ${game}` : ''}</td>
                     <td>${valid ? `Possible ${game}` : ''}</td>
-                    <td>${gamePower}</td>
+                    <td>${numeral(gamePower).format('0,0')}</td>
                     <td>
                       ${draws.map((draw, index) => {
                         return html`
@@ -170,9 +171,9 @@ export class DayTwo extends PuzzleToggleWithLit {
               })}
               <tr class="total">
                 <td>Total</td>
-                <td>${totalInvalidScore}</td>
-                <td>${totalPossibleScore}</td>
-                <td>${totalGamePowers}</td>
+                <td>${numeral(totalInvalidScore).format('0,0')}</td>
+                <td>${numeral(totalPossibleScore).format('0,0')}</td>
+                <td>${numeral(totalGamePowers).format('0,0')}</td>
                 <td></td>
               </tr>
             </tbody>
