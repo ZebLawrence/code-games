@@ -1,4 +1,5 @@
 import { css, html } from 'lit'
+import { classMap } from 'lit/directives/class-map.js'
 import { PuzzleToggleWithLit } from '../../../mixins/puzzleToggle'
 import {
   examplePuzzle,
@@ -80,7 +81,7 @@ export class DayFour extends PuzzleToggleWithLit {
 
     Object.entries(this.puzzle).forEach(([cardName, { matches, cardScore }]) => {
       totalCardScores += cardScore
-      originalCards[cardName] = [{ matches }]  
+      originalCards[cardName] = [{ matches, cardScore }]  
     })
 
     Object.entries(originalCards).forEach(([cardName, instances]) => {
@@ -101,16 +102,39 @@ export class DayFour extends PuzzleToggleWithLit {
       <my-card>
         <div class="d-flex-grid justify-between">
           ${this.puzzleSwitcher(dayFour2023.adventUrl)}
-          <div>
-            Rules
-          </div>
         </div>
       </my-card>
       <my-card>
-        Total cards scores: ${totalCardScores}
-      </my-card>
-      <my-card>
-        Total scratch cards: ${totalScratchCards}
+        <table>
+          <tr>
+            <th>Card</th>
+            <th>Matches</th>
+            <th>Card Score</th>
+            <th>Cards of type Won plus original</th>
+          </tr>
+          <tbody>
+            ${Object.entries(originalCards).map(([cardName, instances]) => {
+              const { matches, cardScore } = instances[0]
+              return html`
+                <tr class=${classMap({
+                  'red': matches.length === 0,
+                  'green': matches.length > 0,
+                })}>
+                  <td>Card ${cardName}</td>
+                  <td>${matches.length}</td>
+                  <td>${cardScore}</td>
+                  <td>${instances.length}</td>
+                </tr>
+              `
+            })}
+            <tr class="total">
+              <td>Total</td>
+              <td></td>
+              <td>${totalCardScores}</td>
+              <td>${totalScratchCards}</td>
+            </tr>
+          </tbody>
+        </table>
       </my-card>
       ${this.timeTaken(startTime)}
     `
