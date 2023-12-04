@@ -33,6 +33,7 @@
     "d3": "^7.8.5",
     "d3-geomap": "^3.3.0",
     "lit": "^2.7.6",
+    "lodash": "^4.17.21",
     "numeral": "^2.0.6",
     "playground-elements": "^0.18.1",
     "topojson": "^3.0.2"
