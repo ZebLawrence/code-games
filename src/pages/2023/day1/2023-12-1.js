@@ -149,6 +149,11 @@ export class DayOne extends PuzzleToggleWithLit {
                 </tr>
               `
             })}
+            <tr class="total">
+              <td>Total</td>
+              <td>${totalPartOne}</td>
+              <td></td>
+            </tr>
           </tbody>
         </table>
       </my-card>
