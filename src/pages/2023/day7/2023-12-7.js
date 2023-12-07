@@ -21,7 +21,7 @@ import five from '../../../assets/images/5.png'
 import four from '../../../assets/images/4.png'
 import three from '../../../assets/images/3.png'
 import two from '../../../assets/images/2.png'
-import joker from '../../../assets/images/joker.png'
+import joker from '../../../assets/images/Joker.png'
 /* playground-hide */
 const elementName = 'day-seven-two-three'
 export const daySeven2023 = {
