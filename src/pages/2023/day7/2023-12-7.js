@@ -254,8 +254,6 @@ export class DaySeven extends PuzzleToggleWithLit {
       0: [],
     }
 
-    //console.log('This is the input', this.puzzle)
-
     this.puzzle.forEach(item => {
       const { score, scorePart2 } = item
       handSets[score] = handSets[score] || []
@@ -292,10 +290,6 @@ export class DaySeven extends PuzzleToggleWithLit {
       ...handSetsPart2[6]
     ]
 
-    console.log('This is the handSets', handSets)
-    console.log('This is the handSetsPart2', handSetsPart2)
-    // console.log('This is the handsRanked', handsRanked)
-
     const totalWinnings = handsRanked.reduce((acc, item, index) => {
       const { bid } = item
       const winnings = bid * (index + 1)
@@ -307,9 +301,6 @@ export class DaySeven extends PuzzleToggleWithLit {
       const winnings = bid * (index + 1)
       return acc + winnings
     }, 0)
-
-    console.log('This is the totalWinnings', totalWinnings)
-    console.log('This is the totalWinningsPart2', totalWinningsPart2)
 
     const getHandType = (rankedHand) => {
       const { score, scorePart2 } = rankedHand
@@ -338,7 +329,6 @@ export class DaySeven extends PuzzleToggleWithLit {
             <th>Rank</th>
             <th>Bid</th>
             <th>Winnings</th>
-            <!-- <th>Hand Raw</th> -->
             <th>Type</th>
             <th>Hand</th>
           </thead>
@@ -354,7 +344,6 @@ export class DaySeven extends PuzzleToggleWithLit {
                   <td>${index + 1}</td>
                   <td>${numeral(bid).format('$0,0')}</td>
                   <td>${numeral(bid * (index + 1)).format('$0,0')}</td>
-                  <!-- <td>${handRaw}</td> -->
                   <td>${getHandType(rankedHand)}</td>
                   <td>
                     <div class="cards">                      
