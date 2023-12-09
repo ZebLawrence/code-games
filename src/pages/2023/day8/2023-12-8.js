@@ -1,7 +1,7 @@
 import { css, html } from 'lit'
 import { classMap } from 'lit/directives/class-map.js'
 import numeral from 'numeral'
-import { leastCommonMultipleList } from '../../../utils/mathHelp'
+import { lowestCommonMultipleList } from '../../../utils/mathHelp'
 import { PuzzleToggleWithLit } from '../../../mixins/puzzleToggle'
 import {
   examplePuzzle,
@@ -52,7 +52,7 @@ export class DayEight extends PuzzleToggleWithLit {
     startPuzzle1: { type: Boolean, state: true },
     startPuzzle2: { type: Boolean, state: true },
   }
-
+/* playground-hide */
   static styles = [
     ...super.styles,
     css`
@@ -66,6 +66,7 @@ export class DayEight extends PuzzleToggleWithLit {
       }
     `
   ]
+/* playground-hide-end */
 
   constructor() {
     super({
@@ -197,7 +198,7 @@ export class DayEight extends PuzzleToggleWithLit {
       `
     }
 
-    const partTwoTotal = leastCommonMultipleList(this.puzzle?.ghostNodes?.map(ghostNode => ghostNode.steps) || [])
+    const partTwoTotal = lowestCommonMultipleList(this.puzzle?.ghostNodes?.map(ghostNode => ghostNode.steps) || [])
 
     return html`
       <my-card>

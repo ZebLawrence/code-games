@@ -22,7 +22,7 @@ export class DayTwo extends PuzzleToggleWithLit {
   static properties = {
     ...super.properties,
   }
-
+/* playground-hide */
   static styles = [
     ...super.styles,
     css`
@@ -32,6 +32,7 @@ export class DayTwo extends PuzzleToggleWithLit {
       }
     `
   ]
+/* playground-hide-end */
 
   constructor() {
     super({

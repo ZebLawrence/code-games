@@ -10,7 +10,7 @@ export const puzzleSwitcher = (selectedPuzzle, puzzles, togglePuzzle, url) => {
         <sp-radio-group label="Small" selected=${selectedPuzzle} name="selectedPuzzle">
           <label>Puzzle input</label>
           ${Object.keys(puzzles).map(puzzleName => {
-            return html`<sp-radio @change=${togglePuzzle} value=${puzzleName} size="s">${puzzleName}</sp-radio>`
+            return html`<sp-radio style="border: 2px solid rgb(84, 84, 84); padding: 0.25em; border-radius: 30px; max-width: 300px; padding-left: 0.75em; margin-bottom: 0.5em;" @change=${togglePuzzle} value=${puzzleName} size="s">${puzzleName}</sp-radio>`
           })}
         </sp-radio-group>
       </div>

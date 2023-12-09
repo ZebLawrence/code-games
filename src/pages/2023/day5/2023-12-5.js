@@ -47,12 +47,12 @@ export class DayFive extends PuzzleToggleWithLit {
   static properties = {
     ...super.properties,
   }
-
+/* playground-hide */
   static styles = [
     ...super.styles,
     css``
   ]
-
+/* playground-hide-end */
   constructor() {
     super({
       examplePuzzle,

@@ -10,6 +10,9 @@ export const common = css`
   .space-between{
     justify-content: space-between;
   }
+  .space-between{
+    justify-content: space-between;
+  }
   .grid{
     display: grid;
     gap: 1em;
@@ -27,6 +30,9 @@ export const common = css`
   }
   .justify-even{
     justify-content: space-evenly;
+  }
+  .justify-center{
+    justify-content: center;
   }
   .justify-end{
     justify-content: flex-end
@@ -97,5 +103,15 @@ export const common = css`
   }
   .blur{
     backdrop-filter: blur(10px);
+  }
+  .bold{
+    font-weight: bold;
+    text-shadow: 0 0 2px #ffffff, 0 0 5px #fdfdfd;
+  }
+  .text-right{
+    text-align: right;
+  }
+  .text-center{
+    text-align: center;
   }
 `

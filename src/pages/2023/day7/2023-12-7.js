@@ -104,21 +104,27 @@ export class DaySeven extends PuzzleToggleWithLit {
   static properties = {
     ...super.properties,
   }
-
+/* playground-hide */
   static styles = [
     ...super.styles,
     css`
       img{
         width: 30px;
         filter: drop-shadow(-4px 5px 2px rgba(0,0,0,0.5));
-        margin-left: -10px;
+        margin-left: -8px;
         position: relative;
+        transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      img:hover{
+        transform: scale(1.5) translate(0, -15px) !important;
+        z-index: 100;
       }
       img:nth-child(1) {
-        transform: rotate(-25deg);
+        transform: rotate(-32deg);
+        top: 3px;
       }
       img:nth-child(2) {
-        transform: rotate(-10deg);
+        transform: rotate(-15deg);
         top: -10px;
       }
       img:nth-child(3) {
@@ -126,20 +132,22 @@ export class DaySeven extends PuzzleToggleWithLit {
         top: -15px;
       }
       img:nth-child(4) {
-        transform: rotate(10deg);
+        transform: rotate(15deg);
         top: -10px;
       }
       img:nth-child(5) {
-        transform: rotate(25deg);
+        transform: rotate(32deg);
+        top: 3px;
       }
       .cards {
-        margin-left: 10px;
+        margin-left: 8px;
       }
       table{
         width: 100%;
       }
     `
   ]
+/* playground-hide-end */
 
   constructor() {
     super({
