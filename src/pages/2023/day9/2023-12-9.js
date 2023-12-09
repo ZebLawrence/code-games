@@ -52,8 +52,10 @@ export class DayNine extends PuzzleToggleWithLit {
   static styles = [
     ...super.styles,
     css`
-      .trees{
+      .scroll{
         overflow-x: scroll;
+        display: flex;
+        justify-content: left;
       }
       .tree {
         padding: 0.5em;
@@ -150,20 +152,22 @@ export class DayNine extends PuzzleToggleWithLit {
     }
 
     return html`
-      <my-card>
-        <div class="d-flex-grid justify-between">
-          ${this.puzzleSwitcher(dayNine2023.adventUrl)}
+      <div class="scroll">
+        <my-card>
           <div>
-            Left Side Total: <sp-badge>${numeral(PartTwoTotal).format('0,0')}</sp-badge>
+            ${this.puzzleSwitcher(dayNine2023.adventUrl)}
+            <div class="mt-1">
+              Left Side Total: <sp-badge>${numeral(PartTwoTotal).format('0,0')}</sp-badge>
+            </div>
+            <div class="mt-1">
+              Right Side Total: <sp-badge>${numeral(PartOneTotal).format('0,0')}</sp-badge>
+            </div>
           </div>
-          <div>
-            Right Side Total: <sp-badge>${numeral(PartOneTotal).format('0,0')}</sp-badge>
-          </div>
-        </div>
-      </my-card>
-      <my-card class="trees">
-        ${this.puzzle[0] && Object.values(this.puzzle).map(renderTree)}
-      </my-card>
+        </my-card>
+        <my-card>
+          ${this.puzzle[0] && Object.values(this.puzzle).map(renderTree)}
+        </my-card>
+      </div>
       ${this.timeTaken(startTime)}
     `
   }
