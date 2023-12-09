@@ -154,10 +154,10 @@ export class DayNine extends PuzzleToggleWithLit {
         <div class="d-flex-grid justify-between">
           ${this.puzzleSwitcher(dayNine2023.adventUrl)}
           <div>
-            Part One Total: <sp-badge>${numeral(PartOneTotal).format('0,0')}</sp-badge>
+            Left Side Total: <sp-badge>${numeral(PartTwoTotal).format('0,0')}</sp-badge>
           </div>
-          <div class="text-right">
-            Part Two Total: <sp-badge>${numeral(PartTwoTotal).format('0,0')}</sp-badge>
+          <div>
+            Right Side Total: <sp-badge>${numeral(PartOneTotal).format('0,0')}</sp-badge>
           </div>
         </div>
       </my-card>
