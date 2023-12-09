@@ -97,7 +97,7 @@ export class DaySix extends PuzzleToggleWithLit {
 
     partTwoTotal = partTwoWaysToWin.long.length
 
-    const renderTable = (waysToWin) => {
+    const renderTable = (waysToWin, total) => {
       return html`
         <table>
           <thead>
@@ -115,7 +115,7 @@ export class DaySix extends PuzzleToggleWithLit {
             })}
             <tr class="total">
               <td>Total</td>
-              <td>${numeral(partOneTotal).format('0,0')}</td>
+              <td>${numeral(total).format('0,0')}</td>
             </tr>
           </tbody>
         </table>
@@ -129,11 +129,11 @@ export class DaySix extends PuzzleToggleWithLit {
         </my-card>
         <my-card label="Part One">
           Part One
-          ${renderTable(partOneWaysToWin)}
+          ${renderTable(partOneWaysToWin, partOneTotal)}
         </my-card>
         <my-card label="Part two">
           Part Two
-          ${renderTable(partTwoWaysToWin)}
+          ${renderTable(partTwoWaysToWin, partTwoTotal)}
         </my-card>
       </div>
       ${this.timeTaken(startTime)}

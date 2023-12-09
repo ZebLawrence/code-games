@@ -4,15 +4,20 @@ export const common = css`
   .d-flex{
     display: flex;
   }
+  .flex-wrap{
+    flex-wrap: wrap;
+  }
   .space-between{
     justify-content: space-between;
   }
   .grid{
     display: grid;
     gap: 1em;
+    
   }
   .d-flex-grid{
-    width: 100%;
+    // width: 100%;
+    flex-grow: 4;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1em;
@@ -89,5 +94,8 @@ export const common = css`
   }
   .black{
     background-color: #0000006c;
+  }
+  .blur{
+    backdrop-filter: blur(10px);
   }
 `
