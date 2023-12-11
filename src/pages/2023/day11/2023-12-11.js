@@ -130,6 +130,7 @@ export class DayEleven extends PuzzleToggleWithLit {
 
     const { galaxyMap, universe, columnsToExpand, rowsToExpand } = this.puzzle
     let totalDistance = 0
+    let totalDistanceV2 = 0
     const examinedGalaxies = {}
     galaxyMap && Object.entries(galaxyMap).forEach(([galaxyNumber, [rowIndex, colIndex]]) => {
       Object.entries(galaxyMap).forEach(([galaxyNumber2, [rowIndex2, colIndex2]]) => {
@@ -151,26 +152,37 @@ export class DayEleven extends PuzzleToggleWithLit {
             }
           })
 
-          const distance = Math.abs(rowIndex - rowIndex2)
+          const distanceV1 = Math.abs(rowIndex - rowIndex2)
+            + Math.abs(colIndex - colIndex2)
+            + (addForRows.length)
+            + (addForCols.length)
+          const distanceV2 = Math.abs(rowIndex - rowIndex2)
             + Math.abs(colIndex - colIndex2)
             + (addForRows.length * (expansionFactor - 1))
             + (addForCols.length * (expansionFactor - 1))
-          examinedGalaxies[`${galaxyNumber}-${galaxyNumber2}`] = distance
-          totalDistance += distance
+          examinedGalaxies[`${galaxyNumber}-${galaxyNumber2}`] = distanceV2
+          totalDistance += distanceV1
+          totalDistanceV2 += distanceV2
         }
       })
     })
 
-    // console.log('examinedGalaxies', examinedGalaxies)
-    console.log('totalDistance', totalDistance)
-
     return html`
       <my-card>
         <div class="d-flex center">
-          <div>${this.puzzleSwitcher(dayEleven2023.adventUrl)}</div>
-          <div class="d-flex space-evenly child-ml-1">
-            <div>The part one distance <sp-badge>0</sp-badge></div>
-            <div>The part two distance<sp-badge>${numeral(totalDistance).format('0,0')}</sp-badge></div>
+          <div>
+            ${this.puzzleSwitcher(dayEleven2023.adventUrl)}
+          </div>
+          <div>
+            <div class="d-flex space-evenly child-ml-1">
+              <div>The part one distance <sp-badge>${numeral(totalDistance).format('0,0')}</sp-badge></div>
+              <div>The part two distance<sp-badge>${numeral(totalDistanceV2).format('0,0')}</sp-badge></div>
+            </div>
+            <div class="d-flex space-evenly child-ml-1 mt-1">
+              <div><sp-badge class="blue">Galaxy Location</sp-badge></div>
+              <div><sp-badge class="black">Empty space</sp-badge></div>
+              <div><sp-badge class="green">1,000,000 unit gaps of empty space</sp-badge></div>
+            </div>
           </div>
         </div>
       </my-card>
@@ -186,6 +198,7 @@ export class DayEleven extends PuzzleToggleWithLit {
                     return html`
                       <td class=${classMap({
                         blue: !isNaN(point),
+                        green: columnsToExpand.includes(colIndex) || rowsToExpand.includes(rowIndex),
                       })}>
                         ${point}
                       </td>
