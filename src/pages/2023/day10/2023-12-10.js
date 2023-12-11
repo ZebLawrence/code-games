@@ -106,7 +106,6 @@ export class DayTen extends PuzzleToggleWithLit {
         width: 0.2em;
         height: 0.2em;
       }
-      
     `
   ]
 /* playground-hide-end */
