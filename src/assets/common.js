@@ -10,13 +10,16 @@ export const common = css`
   .space-between{
     justify-content: space-between;
   }
-  .space-between{
-    justify-content: space-between;
+  .space-evenly{
+    justify-content: space-evenly
   }
   .grid{
     display: grid;
     gap: 1em;
     
+  }
+  .child-ml-1 > *{
+    margin-left: 1em;
   }
   .d-flex-grid{
     // width: 100%;
@@ -87,16 +90,32 @@ export const common = css`
   .total{
     background-color: #8fc9fc0f;
   }
-
+  .orange{
+    background-color: #ff800053;
+  }
   .red{
     background-color: #cc00006a;
   }
-
+  .bright .red{
+    background-color: #cc0000be;
+  }
+  .yellow{
+    background-color: #cccc006a;
+  }
+  .bright .yellow{
+    background-color: #f7f705e6;
+  }
   .blue{
     background-color: #0000cc7a;
   }
+  .bright .blue{
+    background-color: #0a0af0ed;
+  }
   .green{
     background-color: #00cc0083;
+  }
+  .bright .green{
+    background-color: #0beb0bea;
   }
   .black{
     background-color: #0000006c;

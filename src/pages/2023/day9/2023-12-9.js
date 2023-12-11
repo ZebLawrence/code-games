@@ -13,8 +13,8 @@ export const dayNine2023 = {
   tag: elementName,
   title: '2023 Day Nine',
   path: '#/2023/day-nine/',
-  codeFileName: '2023-12-8.js',
-  adventUrl: 'https://adventofcode.com/2023/day/8',
+  codeFileName: '2023-12-9.js',
+  adventUrl: 'https://adventofcode.com/2023/day/9',
 }
 /* playground-hide-end */
 
