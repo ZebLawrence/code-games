@@ -5,6 +5,28 @@ export const addNumbers = (numbers) => {
   })
 }
 
+export const addNumbersDeep = (...numbers) => {
+  let total = 0;
+  for (const num of numbers) {
+    if (typeof num === 'number') {
+      total += num;
+    } else {
+      for (const n of num) {
+        total += n;
+      }
+    }
+  }
+  return total;
+}
+
+export function toInt(x) {
+  return parseInt(x, 10);
+}
+
+export function toNumber(x) {
+  return Number(x);
+}
+
 export const multiplyNumbers = (numbers) => {
   return numbers.reduce((acc, number) => {
     return acc * number

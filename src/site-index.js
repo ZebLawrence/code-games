@@ -4,6 +4,7 @@ import '@spectrum-web-components/styles/all-medium-darkest.css'
 import '@spectrum-web-components/theme/sp-theme.js'
 import '@spectrum-web-components/theme/src/themes.js'
 import { isCurrentPage } from './utils/pathHelpers'
+import './utils/errorHelper'
 import siteConfig from './site-config'
 import './components/page-template'
 

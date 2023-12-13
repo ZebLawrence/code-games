@@ -53,6 +53,7 @@ export class DayEleven extends PuzzleToggleWithLit {
       fullPuzzle,
     })
     this.expansionFactor = 1000000
+    this.selectedPuzzle = 'fullPuzzle'
   }
 
   parseInput(input) {
