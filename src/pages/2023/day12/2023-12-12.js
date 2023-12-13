@@ -73,7 +73,6 @@ const permutationCounts = memoize((line, groups) => {
 export class DayTwelve extends PuzzleToggleWithLit {
   static properties = {
     ...super.properties,
-    expansionFactor: { type: Number },
   }
 /* playground-hide */
   static styles = [

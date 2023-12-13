@@ -39,6 +39,9 @@
     "2023-12-12.js": {
       "content": "console.log('This is the temp holder till the content gets added during build')"
     },
+    "2023-12-13.js": {
+      "content": "console.log('This is the temp holder till the content gets added during build')"
+    },
     "vote-map.js": {
       "content": "console.log('This is the temp holder till the content gets added during build')"
     }
