@@ -40,6 +40,9 @@ export const common = css`
   .justify-end{
     justify-content: flex-end
   }
+  .mx-1{
+    margin: 1em;
+  }
   .mt-1{
     margin-top: 1em;
   }
@@ -77,6 +80,7 @@ export const common = css`
     border: 1px solid black;
     border-collapse: collapse;
     padding: 0.5em;
+    height: max-content;
   }
 
   .valid{
