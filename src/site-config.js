@@ -16,6 +16,7 @@ import { dayTen2023 } from './pages/2023/day10/2023-12-10.js'
 import { dayEleven2023 } from './pages/2023/day11/2023-12-11.js'
 import { dayTwelve2023 } from './pages/2023/day12/2023-12-12.js'
 import { dayThirteen2023 } from './pages/2023/day13/2023-12-13.js'
+import { dayFourteen2023 } from './pages/2023/day14/2023-12-14.js'
 import { voteMap } from './pages/map/vote-map.js'
 
 export default {
@@ -37,6 +38,7 @@ export default {
     dayEleven2023,
     dayTwelve2023,
     dayThirteen2023,
+    dayFourteen2023,
     voteMap,
   ],
   main: [
@@ -65,6 +67,7 @@ export default {
       dayEleven2023,
       dayTwelve2023,
       dayThirteen2023,
+      dayFourteen2023,
     ],
   }
 }
