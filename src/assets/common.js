@@ -13,6 +13,9 @@ export const common = css`
   .space-evenly{
     justify-content: space-evenly
   }
+  .items-center{
+    align-items: center;
+  }
   .grid{
     display: grid;
     gap: 1em;

@@ -3,6 +3,8 @@ import '@spectrum-web-components/top-nav/sp-top-nav.js'
 import '@spectrum-web-components/top-nav/sp-top-nav-item.js'
 import '@spectrum-web-components/picker/sp-picker.js'
 import '@spectrum-web-components/link/sp-link.js'
+import '@spectrum-web-components/tags/sp-tag.js'
+import '@spectrum-web-components/tags/sp-tags.js'
 
 import siteConfig from '../site-config'
 import { buildMenu, linkMenuItem, linkMenuGroup, topNavLink } from './menu'
