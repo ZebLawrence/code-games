@@ -55,7 +55,7 @@ export class DayFourteen extends PuzzleToggleWithLit {
     css`
       table td{
         padding: 0.1em;
-
+        font-size: 0.5em;
       }
     `
   ]
@@ -170,8 +170,15 @@ export class DayFourteen extends PuzzleToggleWithLit {
             return html`
               <tr>
                 ${row.map((col, colIndex) => {
+                  let cell = col
+                  if (col === 'O') {
+                    cell = '🪨'
+                  }
+                  if (col === '#') {
+                    cell = '🧱'
+                  }
                   return html`
-                    <td>${col}</td>
+                    <td class="black">${cell}</td>
                   `
                 })}
               </tr>

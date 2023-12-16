@@ -62,7 +62,6 @@ export class DayFifteen extends PuzzleToggleWithLit {
   }
 
   parseInput(input) {
-    console.log('input', input)
     let hashTotal = 0
     let focusLensTotal = 0
     const boxes = Array.apply(null, Array(256)).map((y, i) => { return []; });
