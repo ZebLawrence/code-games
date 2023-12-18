@@ -19,7 +19,9 @@ import { dayThirteen2023 } from './pages/2023/day13/2023-12-13.js'
 import { dayFourteen2023 } from './pages/2023/day14/2023-12-14.js'
 import { dayFifteen2023 } from './pages/2023/day15/2023-12-15.js'
 import { daySixteen2023 } from './pages/2023/day16/2023-12-16.js'
+import { daySeventeen2023 } from './pages/2023/day17/2023-12-17.js'
 import { voteMap } from './pages/map/vote-map.js'
+import { EclipseAnimation } from './pages/eclipse/eclipse-animation.js'
 
 export default {
   pagesConfig: [
@@ -43,13 +45,16 @@ export default {
     dayFourteen2023,
     dayFifteen2023,
     daySixteen2023,
+    daySeventeen2023,
     voteMap,
+    EclipseAnimation,
   ],
   main: [
     home,
     home2020,
     home2023,
     voteMap,
+    EclipseAnimation,
   ],
   groups: {
     2020: [
@@ -74,6 +79,7 @@ export default {
       dayFourteen2023,
       dayFifteen2023,
       daySixteen2023,
+      daySeventeen2023,
     ],
   }
 }
