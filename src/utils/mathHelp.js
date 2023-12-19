@@ -48,3 +48,19 @@ export const lowestCommonMultipleList = list => {
   });
   return multiple;
 }
+
+export const calcPolygonArea = coords => {
+  var total = 0;
+
+  for (var i = 0, l = coords.length; i < l; i++) {
+    var addX = coords[i][1];
+    var addY = coords[i == coords.length - 1 ? 0 : i + 1][0];
+    var subX = coords[i == coords.length - 1 ? 0 : i + 1][1];
+    var subY = coords[i][0];
+
+    total += (addX * addY * 0.5);
+    total -= (subX * subY * 0.5);
+  }
+
+  return Math.abs(total);
+}

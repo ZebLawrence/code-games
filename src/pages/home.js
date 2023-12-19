@@ -1,5 +1,5 @@
 import { LitElement, css, html } from 'lit'
-import { problemStatement } from './2023/day16/problem-statement'
+import { problemStatement } from './2023/day18/problem-statement'
 import '../components/type-code'
 
 const elementName = 'home-page'
@@ -35,7 +35,7 @@ export class HomePage extends LitElement {
     return html`
       <div class="card">
         <type-code content="Welcome to my Advent of code site.\nThis is a place where I solve the daily puzzles and try to build fun visualizations of each.\nThis is new for year 2023, you can find my previous puzzle visualizations here: https://advent.zeblawrence.com/"></type-code>
-        <a href="#/2023/day-sixteen/" target="_blank"> >_ 2023 Day 16</a>
+        <a href="#/2023/day-Eighteen/" target="_blank"> >_ 2023 Day 18</a>
         <type-code content=${problemStatement}></type-code>
       </div>
     `

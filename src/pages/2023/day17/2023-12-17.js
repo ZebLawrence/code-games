@@ -9,7 +9,6 @@ import {
   examplePuzzle,
   fullPuzzle,
 } from './2023-12-17-puzzle'
-import { min } from 'lodash'
 
 /* playground-hide */
 const elementName = 'day-seventeen-two-three'
