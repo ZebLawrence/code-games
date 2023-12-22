@@ -155,9 +155,6 @@ export class DayTwenty extends PuzzleToggleWithLit {
           </div>
         </div>
       </my-card>
-      <my-card label="Canvas">
-        <canvas id="canvas" width="500" height="500"></canvas>
-      </my-card>
       <my-card label="Part 1">
         ${renderTable([])}
       </my-card>

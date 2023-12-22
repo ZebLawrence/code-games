@@ -27,7 +27,11 @@ export class DayTwentyOne extends PuzzleToggleWithLit {
 /* playground-hide */
   static styles = [
     ...super.styles,
-    css``
+    css`
+      table td{
+        padding: 0;
+      }
+    `
   ]
 /* playground-hide-end */
 
@@ -140,6 +144,8 @@ export class DayTwentyOne extends PuzzleToggleWithLit {
 
     return {
       partOne: totalGardens,
+      gardenMap,
+      visited,
     }
   }
 
@@ -150,6 +156,8 @@ export class DayTwentyOne extends PuzzleToggleWithLit {
 
     const {
       partOne,
+      gardenMap,
+      visited,
     } = this.puzzle
     
     console.log('this.puzzle', this.puzzle)
@@ -162,8 +170,11 @@ export class DayTwentyOne extends PuzzleToggleWithLit {
               <tr>
                 ${row.map((col, colIndex) => {
                   let cell = col
+                  const blue = visited && visited[`${rowIndex}-${colIndex}`]
                   return html`
-                    <td class="black">${cell}</td>
+                    <td class=${classMap({
+                      blue,
+                    })}>${cell}</td>
                   `
                 })}
               </tr>
@@ -187,11 +198,8 @@ export class DayTwentyOne extends PuzzleToggleWithLit {
           </div>
         </div>
       </my-card>
-      <my-card label="Canvas">
-        <canvas id="canvas" width="500" height="500"></canvas>
-      </my-card>
       <my-card label="Part 1">
-        ${renderTable([])}
+        ${renderTable(gardenMap || [])}
       </my-card>
 
       ${this.timeTaken(startTime)}
