@@ -20,6 +20,46 @@ export const dayTwenty2023 = {
 }
 /* playground-hide-end */
 
+class Module {
+  constructor({name, destinationModules, prefix}) {
+    this.name = name
+    this.destinationModules = destinationModules
+    this.prefix = prefix
+    this.sentPulses = []
+
+    if (name === 'broadcaster') {
+      this.isBroadcaster = true
+    }
+
+    if (prefix === '%') {
+      this.isOn = false
+      this.isFlipFlop = true
+    }
+
+    if (prefix === '&') {
+      this.lastPulse = 0
+      this.isConjunction = true
+    }
+  }
+
+  sendPulse(pulse) {
+    // send the result pulse to all destination modules
+    // record the pulse in sentPulses
+  }
+
+  receivePulse(pulse) {
+    // if broadcaster just send to all destination modules
+
+    // if flipflop and received pulse is 1, ignore it
+    // if flipflop and received pulse is 0, toggle !this.isOn, if was on, send 0, if was off, send 1
+
+    // if conjunction first remember the pulse as this.lastPulse
+    // if all pulses are 1, send 0 to all destination modules
+    // if any pulses are 0, send 1 to all destination modules
+
+    // call the sendPulse method with the result pulse
+  }
+}
 
 export class DayTwenty extends PuzzleToggleWithLit {
   static properties = {
@@ -41,7 +81,37 @@ export class DayTwenty extends PuzzleToggleWithLit {
 
   parseInput(input) {
     console.log('input', input)
-   
+    const modules = {}
+
+    const modulesRaw = input.split('\n').map(m => m.trim())
+
+    modulesRaw.forEach(line => {
+      const [moduleNameRaw, moduleDataRaw] = line.split(' -> ')
+      const prefix = moduleNameRaw.slice(0, 1)
+      const moduleName = moduleNameRaw.slice(1)
+
+      const destinationModules = moduleDataRaw.split(',').map(m => m.trim())
+      // console.log('destinationModules', destinationModules)
+      // console.log('prefix', prefix)
+      // console.log('Name', moduleName)
+      // console.log('DataRaw', moduleDataRaw)
+
+      if (prefix === 'b') {
+        modules[moduleNameRaw] = new Module({
+          name: moduleNameRaw,
+          destinationModules,
+        })
+      } else {
+        modules[moduleName] = new Module({
+          name: moduleName,
+          prefix,
+          destinationModules,
+        })
+      }
+    })
+
+    console.log('modules', modules)
+
     return {}
   }
 
