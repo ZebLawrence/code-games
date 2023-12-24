@@ -127,6 +127,9 @@ export const common = css`
   .black{
     background-color: #0000006c;
   }
+  .white{
+    background-color: #ffffff61;
+  }
   .blur{
     backdrop-filter: blur(10px);
   }

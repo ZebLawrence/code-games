@@ -24,6 +24,7 @@ import { dayEighteen2023 } from './pages/2023/day18/2023-12-18.js'
 import { dayNineteen2023 } from './pages/2023/day19/2023-12-19.js'
 import { dayTwenty2023 } from './pages/2023/day20/2023-12-20.js'
 import { dayTwentyOne2023 } from './pages/2023/day21/2023-12-21.js'
+import { dayTwentyThree2023 } from './pages/2023/day23/2023-12-23.js'
 import { voteMap } from './pages/map/vote-map.js'
 import { EclipseAnimation } from './pages/eclipse/eclipse-animation.js'
 
@@ -54,6 +55,7 @@ export default {
     dayNineteen2023,
     dayTwenty2023,
     dayTwentyOne2023,
+    dayTwentyThree2023,
     voteMap,
     EclipseAnimation,
   ],
@@ -92,6 +94,7 @@ export default {
       dayNineteen2023,
       dayTwenty2023,
       dayTwentyOne2023,
+      dayTwentyThree2023,
     ],
   }
 }
