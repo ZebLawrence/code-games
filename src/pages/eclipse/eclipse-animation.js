@@ -55,10 +55,7 @@ export class EclipseAnimationClass extends LitElement {
       height: calc(var(--size) - 30px);
       z-index: 9;
       background: var(--my-white);
-      // border: 1px solid red;
       border-radius: 50%;
-      // box-shadow: 0px 0px 5px 3px var(--my-white);
-      // filter: url(#wavy) blur(1px);
     }
     
     .circle:before,
@@ -74,8 +71,7 @@ export class EclipseAnimationClass extends LitElement {
     }
     .circle:before {
       box-shadow: 0 0 var(--boxShadow) var(--my-black), inset 0 0 var(--boxShadow) var(--my-black);
-      //-webkit-box-reflect: below 10px
-        linear-gradient(transparent, transparent, #0002);
+      linear-gradient: (transparent, transparent, #0002);
       animation: move 5s linear infinite;
     }
     
@@ -86,12 +82,10 @@ export class EclipseAnimationClass extends LitElement {
     @keyframes move {
       0% {
         box-shadow:  inset 0 0 var(--boxShadow) var(--my-white);
-        // filter: hue-rotate(0deg);
       }
       20% {
         box-shadow:  inset 0 0 60px var(--my-white);
       }
-    
       40% {
         box-shadow:  inset 0 0 40px var(--my-white);
       }
@@ -103,7 +97,6 @@ export class EclipseAnimationClass extends LitElement {
       }
       100% {
         box-shadow:  inset 0 0 var(--boxShadow) var(--my-white);
-        // filter: hue-rotate(360deg);
       }
     }
     
