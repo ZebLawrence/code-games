@@ -1,5 +1,7 @@
+
 import { LitElement, css, html } from 'lit'
 import { classMap } from 'lit/directives/class-map.js'
+import './portfolio-chart.js'
 
 export const  CryptoStream = {
   tag: 'crypto-stream',
@@ -142,6 +144,18 @@ export class CryptoStreamClass extends LitElement {
       console.error('WebSocket Client Error', error)
     }
   }
+
+  setPortfolioData(total) {
+    const previous = JSON.parse(localStorage.getItem('portfolioData')) || []
+    const current = {
+      date: Date.now(),
+      total
+    }
+    if (previous[previous.length - 1]?.total !== total) {
+      localStorage.setItem('portfolioData', JSON.stringify([...previous, current]))
+    }
+  }
+
   render() {
     const {
       symbols,
@@ -187,10 +201,12 @@ export class CryptoStreamClass extends LitElement {
         </tr>
       `
     })
+    this.setPortfolioData(total)
 
     return html`
       <div class="body">
         Crypto stream
+        <portfolio-chart></portfolio-chart>
         <table>
           <thead>
             <tr>
