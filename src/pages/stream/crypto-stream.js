@@ -51,10 +51,10 @@ export class CryptoStreamClass extends LitElement {
     this.defaultDataObj = { c: 0, p: 0, Q: 0, P: 0, q: 0 }
     this.symbols = [
       {
-          purchasedPrice: 300,
+          purchasedPrice: 250,
           coin: 'ETH',
           coinPair: 'ETHUSDT',
-          ratio: 0.08147,
+          ratio: 0.06897,
           chartNum: 1027
       },
       {
@@ -97,6 +97,13 @@ export class CryptoStreamClass extends LitElement {
           coin: 'MATIC',
           coinPair: 'MATICUSDT',
           ratio: 127.1,
+          chartNum: 3890
+      },
+      {
+          purchasedPrice: 48.69,
+          coin: 'CLV',
+          coinPair: 'CLVUSDT',
+          ratio: 331.7972,
           chartNum: 3890
       }
   ]

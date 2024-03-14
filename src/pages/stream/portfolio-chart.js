@@ -43,6 +43,7 @@ export class PortfolioChart extends LitElement {
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+      
     const x = d3.scaleLinear()
       .domain(d3.extent(data, function(d) {
         if (d.date !== 0) {
