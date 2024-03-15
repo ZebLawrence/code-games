@@ -167,6 +167,8 @@ export class CryptoStreamClass extends LitElement {
     }
     if (previous[previous.length - 1] && previous[previous.length - 1]?.Close !== Close) {
       localStorage.setItem('portfolioData', JSON.stringify([...previous, current]))
+    } else if (!previous[previous.length - 1]) {
+      localStorage.setItem('portfolioData', JSON.stringify([current]))
     }
   }
 
