@@ -1,6 +1,10 @@
 
 import { LitElement, css, html } from 'lit'
-import * as d3 from 'd3'
+import * as am5 from "@amcharts/amcharts5";
+import * as am5xy from "@amcharts/amcharts5/xy";
+import AnimatedTheme from "@amcharts/amcharts5/themes/Animated";
+import DarkTheme from "@amcharts/amcharts5/themes/Dark";
+import * as am5stock from "@amcharts/amcharts5/stock";
 import '@spectrum-web-components/button/sp-button.js'
 
 export class PortfolioChart extends LitElement {
@@ -8,9 +12,17 @@ export class PortfolioChart extends LitElement {
     data: { type: Array, state: true }
   }
 
+  static styles = [
+    css`
+      #chartdiv {
+        height: 500px;
+      }
+    `
+  ]
+
   constructor() {
     super()
-    this.defaultData = [{ date: Date.now(), total: 0 }]
+    this.defaultData = []
     this.data = this.defaultData
     setInterval(() => {
       const portfolioData = JSON.parse(localStorage.getItem('portfolioData'))
@@ -21,74 +33,78 @@ export class PortfolioChart extends LitElement {
   render() {
     return html`
       <div>
-        <sp-button variant="cta" @click=${() => localStorage.setItem('portfolioData', JSON.stringify(this.defaultData))}>Clear</sp-button>
-        <div id="portfolio-chart"></div>
+        <sp-button size="s" @click=${() => localStorage.setItem('portfolioData', JSON.stringify(this.defaultData))}>Clear</sp-button>
+        <div id="chartdiv"></div>
       </div>
     `
   }
 
-  renderChart(w) {
+  renderChart() {
     const { data } = this
-    data.shift()
-    //console.log('renderChart', data)
-    const margin = {top: 10, right: 30, bottom: 30, left: 60}
-    const width = w - margin.left - margin.right
-    const height = 400 - margin.top - margin.bottom
-    const container = this.shadowRoot.getElementById('portfolio-chart')
-    container.innerHTML = '';
-    // append the svg object to the body of the page
-    const svg = d3.select(this.shadowRoot.getElementById('portfolio-chart'))
-      .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-      
-    const x = d3.scaleLinear()
-      .domain(d3.extent(data, function(d) {
-        if (d.date !== 0) {
-          return d.date;
-        }
-      }))
-      .range([ 0, width ])
-    svg.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x))
+    const container = this.shadowRoot.getElementById('chartdiv')
+    let root = am5.Root.new(container);
 
-    // Add Y axis
-    const y = d3.scaleLinear()
-      .domain(d3.extent(data, function(d) {
-        if (d.total !== 0) {
-          return d.total;
-        }
-      }))
-      .range([height, 0])
-    svg.append("g")
-      .call(d3.axisLeft(y))
-    // Add the line
-    svg.append("path")
-      .datum(data)
-      .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
-      .attr("d",
-        d3.line()
-          .x(function(d) {
-            const xResult = x(d.date)
-            return xResult
-          })
-        .y(function(d) {
-          const yResult = y(d.total)
-          // console.log('yResult', yResult)
-          return yResult
-        })
-      )
+    root.setThemes([
+      AnimatedTheme.new(root),
+      DarkTheme.new(root)
+    ]);
+    root.interfaceColors.set("text", am5.color(0xffffff));
+    root.interfaceColors.set("stroke", am5.color(0xffffff));
+
+    let stockChart = root.container.children.push(am5stock.StockChart.new(root, {
+    }));
+
+    let mainPanel = stockChart.panels.push(am5stock.StockPanel.new(root, {
+      wheelY: "zoomX",
+      panX: true,
+      panY: true
+    }));
+
+    let valueAxis = mainPanel.yAxes.push(am5xy.ValueAxis.new(root, {
+      renderer: am5xy.AxisRendererY.new(root, {})
+    }));
+
+    let dateAxis = mainPanel.xAxes.push(am5xy.GaplessDateAxis.new(root, {
+      baseInterval: {
+        timeUnit: "second",
+        count: 1
+      },
+      renderer: am5xy.AxisRendererX.new(root, {})
+    }));
+
+    this.valueSeries = mainPanel.series.push(am5xy.LineSeries.new(root, {
+      name: "STCK",
+      valueXField: "Date",
+      valueYField: "Close",
+      xAxis: dateAxis,
+      yAxis: valueAxis,
+      legendValueText: "{valueY}"
+    }));
+
+    this.valueSeries.data.setAll(data);
+
+    stockChart.set("stockSeries", this.valueSeries);
+
+    mainPanel.set("cursor", am5xy.XYCursor.new(root, {
+      yAxis: valueAxis,
+      xAxis: dateAxis,
+      snapToSeries: [this.valueSeries],
+      snapToSeriesBy: "y!"
+    }));
+  }
+
+  updateChart() {
+    this.valueSeries.data.setAll(this.data);
+  }
+
+  firstUpdated() {
+    const { width } = this.getBoundingClientRect()
+    this.renderChart(width)
   }
 
   updated(updated) {
-    const { width } = this.getBoundingClientRect()
     super.updated(updated)
-    this.renderChart(width)
+    this.updateChart()
   }
 }
 

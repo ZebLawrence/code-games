@@ -41,6 +41,13 @@ export class CryptoStreamClass extends LitElement {
         color: #00cc00;
         text-shadow: 0 0 2px #00cc00, 0 0 5px #00cc00;
       }
+
+      @media (max-width: 1600px) {
+        table th, table td {
+          padding: 2px;
+          font-size: 0.75em;
+        }
+      }
     `
   ]
 
@@ -152,13 +159,13 @@ export class CryptoStreamClass extends LitElement {
     }
   }
 
-  setPortfolioData(total) {
+  setPortfolioData(Close) {
     const previous = JSON.parse(localStorage.getItem('portfolioData')) || []
     const current = {
-      date: Date.now(),
-      total
+      Date: Date.now(),
+      Close
     }
-    if (previous[previous.length - 1]?.total !== total) {
+    if (previous[previous.length - 1] && previous[previous.length - 1]?.Close !== Close) {
       localStorage.setItem('portfolioData', JSON.stringify([...previous, current]))
     }
   }
@@ -172,6 +179,7 @@ export class CryptoStreamClass extends LitElement {
 
     let total = 0
     let purchasedTotal = 0
+    let priceCount = 0
 
     const tableRows = symbols.map(({
       coin,
@@ -183,6 +191,9 @@ export class CryptoStreamClass extends LitElement {
       const [ticker] = streams.ticker || [defaultDataObj, defaultDataObj]
       const [trade, previousTrade] = streams.aggTrade || [defaultDataObj, defaultDataObj]
 
+      if (ticker.c > 0) {
+        priceCount++
+      }
       total += ticker?.c * ratio
       purchasedTotal += purchasedPrice
 
@@ -208,11 +219,13 @@ export class CryptoStreamClass extends LitElement {
         </tr>
       `
     })
-    this.setPortfolioData(total)
+
+    if (priceCount === symbols.length) {
+      this.setPortfolioData(total)
+    }
 
     return html`
       <div class="body">
-        Crypto stream
         <portfolio-chart></portfolio-chart>
         <table>
           <thead>
