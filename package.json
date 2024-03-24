@@ -45,6 +45,7 @@
     "websocket": "^1.0.34"
   },
   "devDependencies": {
+    "chalk": "^5.3.0",
     "rimraf": "^5.0.5",
     "vite": "^4.4.5"
   }

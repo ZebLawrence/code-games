@@ -58,6 +58,13 @@ export class CryptoStreamClass extends LitElement {
     this.defaultDataObj = { c: 0, p: 0, Q: 0, P: 0, q: 0 }
     this.symbols = [
       {
+          purchasedPrice: 520.03,
+          coin: 'BTC',
+          coinPair: 'BTCUSDT',
+          ratio: 0.00792231,
+          chartNum: 1027
+      },
+      {
           purchasedPrice: 250,
           coin: 'ETH',
           coinPair: 'ETHUSDT',
@@ -65,24 +72,10 @@ export class CryptoStreamClass extends LitElement {
           chartNum: 1027
       },
       {
-          purchasedPrice: 300,
-          coin: 'SOL',
-          coinPair: 'SOLUSDT',
-          ratio: 1.66,
-          chartNum: 5426
-      },
-      {
-          purchasedPrice: 50,
-          coin: 'ADA',
-          coinPair: 'ADAUSDT',
-          ratio: 21.9,
-          chartNum: 2010
-      },
-      {
-          purchasedPrice: 50,
+          purchasedPrice: 0.01,
           coin: 'ATOM',
           coinPair: 'ATOMUSDT',
-          ratio: 1.253,
+          ratio: 0.00121141,
           chartNum: 3794
       },
       {
@@ -93,24 +86,24 @@ export class CryptoStreamClass extends LitElement {
           chartNum: 74
       },        
       {
-          purchasedPrice: 50,
+          purchasedPrice: 0.01,
           coin: 'ALGO',
           coinPair: 'ALGOUSDT',
-          ratio: 26.719,
+          ratio: 0.05084596,
           chartNum: 4030
       },
       {
-          purchasedPrice: 200,
+          purchasedPrice: 0.09,
           coin: 'MATIC',
           coinPair: 'MATICUSDT',
-          ratio: 127.1,
+          ratio: 0.1,
           chartNum: 3890
       },
       {
-          purchasedPrice: 48.69,
+          purchasedPrice: 0.01,
           coin: 'CLV',
           coinPair: 'CLVUSDT',
-          ratio: 331.7972,
+          ratio: 0.0972,
           chartNum: 3890
       }
   ]
