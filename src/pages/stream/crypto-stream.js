@@ -77,14 +77,7 @@ export class CryptoStreamClass extends LitElement {
           coinPair: 'ATOMUSDT',
           ratio: 0.00121141,
           chartNum: 3794
-      },
-      {
-          purchasedPrice: 50,
-          coin: 'DOGE',
-          coinPair: 'DOGEUSDT',
-          ratio: 221,
-          chartNum: 74
-      },        
+      },      
       {
           purchasedPrice: 0.01,
           coin: 'ALGO',
