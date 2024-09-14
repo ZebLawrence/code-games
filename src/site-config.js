@@ -29,6 +29,9 @@ import { voteMap } from './pages/map/vote-map.js'
 import { EclipseAnimation } from './pages/eclipse/eclipse-animation.js'
 import { CryptoStream } from './pages/stream/crypto-stream.js'
 
+import { home2024 } from './pages/2024/2024-home.js'
+import { dayOne2024 } from './pages/2024/day1/2024-8-20.js'
+
 export default {
   pagesConfig: [
     home,
@@ -60,11 +63,14 @@ export default {
     voteMap,
     EclipseAnimation,
     CryptoStream,
+    home2024,
+    dayOne2024
   ],
   main: [
     home,
     home2020,
     home2023,
+    home2024,
     voteMap,
     EclipseAnimation,
     CryptoStream,
@@ -99,5 +105,8 @@ export default {
       dayTwentyOne2023,
       dayTwentyThree2023,
     ],
+    2024:[
+      dayOne2024
+    ]
   }
 }

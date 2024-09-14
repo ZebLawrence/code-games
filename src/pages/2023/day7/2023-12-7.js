@@ -381,22 +381,22 @@ export class DaySeven extends PuzzleToggleWithLit {
     }
     
     return html`
-      <my-card>
+      <shadow-card>
         <div class="d-flex-grid justify-between">
           ${this.puzzleSwitcher(daySeven2023.adventUrl)}
           <sp-badge class="blue" size="l">Unchanged Hand</sp-badge>
           <sp-badge class="red" size="l">Wild Card Hand</sp-badge>
         </div>
-      </my-card>
+      </shadow-card>
       <div class="d-flex-grid">
-        <my-card label="Part One">
+        <shadow-card label="Part One">
           Part One
           ${renderCardsTable(handsRanked, totalWinnings, true)}
-        </my-card>
-        <my-card label="Part two">
+        </shadow-card>
+        <shadow-card label="Part two">
           Part Two
           ${renderCardsTable(handsRankedPart2, totalWinningsPart2, false)}
-        </my-card>
+        </shadow-card>
       </div>
       ${this.timeTaken(startTime)}
     `
