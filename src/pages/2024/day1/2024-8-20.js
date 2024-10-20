@@ -18,17 +18,18 @@ export class DayOne extends LitElement {
     ...super.properties,
     shadowLengthX: { state: true },
     shadowLengthY: { state: true },
-    targetPosition: { state: true }
+    blur: { state: true },
   }
 /* playground-hide */
   static styles = [
     css`
-      #textDiv {
+      shadow-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 70vh;
       }
-      my-card {
-        height: 100vh;
-      }
-      .card-container {
+      .content {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -43,7 +44,7 @@ export class DayOne extends LitElement {
     this.shadowLengthX = 100
     this.shadowLengthY = 100
     this.blur = 0;
-    // document.onmousemove = this.handleMouseMove
+    document.addEventListener('mousemove', this.handleMouseMove);
   }
   
   firstUpdated(props) {
@@ -76,16 +77,9 @@ export class DayOne extends LitElement {
     }
 
     return html`
-      <my-card>
-        Here
-        <shadow-card>
-          <div>something</div>
-        </shadow-card>
-        There
-        <div class="card-container">
-          <div id="textDiv" style=${styleMap(shadowStyles)}>TEST</div>
-        </div>
-      </my-card>
+      <shadow-card>
+        <div class="content">something</div>
+      </shadow-card>
     `
   }
 }

@@ -7,7 +7,7 @@ export class ShadowCard extends LitElement {
     ...super.properties,
     shadowLengthX: { state: true },
     shadowLengthY: { state: true },
-    targetPosition: { state: true }
+    blur: { state: true }
   }
 
   constructor() {
@@ -16,7 +16,6 @@ export class ShadowCard extends LitElement {
     this.shadowLengthY = 100
     this.blur = 0;
     document.addEventListener('mousemove', this.handleMouseMove);
-    // document.onmousemove = this.handleMouseMove
   }
   
   firstUpdated(props) {
@@ -25,7 +24,6 @@ export class ShadowCard extends LitElement {
   }
   
   handleMouseMove = ({ x, y }) => {
-    // const { x: targetX, y: targetY } = this.slotChild.getBoundingClientRect()
     const { width, height, x: targetX, y: targetY } = this.slotChild.getBoundingClientRect();
     const centerX = targetX + width / 2;
     const centerY = targetY + height / 2;
@@ -36,12 +34,10 @@ export class ShadowCard extends LitElement {
     this.blur = (Math.sqrt(xOffset ** 2 + yOffset ** 2) * 0.01) + 3
     const slotChildStyle = window.getComputedStyle(this.slotChild);
     const slotChildColor = slotChildStyle.color;
-    console.log('slotChildColor', slotChildColor);
     this.slotChild.style.textShadow = `${this.shadowLengthX}px ${this.shadowLengthY}px ${this.blur}px ${slotChildColor}`
   }
 
   render() {
-
     return html`
       <my-card>
         <slot></slot>
