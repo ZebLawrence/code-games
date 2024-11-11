@@ -35,6 +35,9 @@ def stringColor(text, style=FontStyles.BOLD, fontColor=FontColors.GREEN, backgro
 def printBoldBlueOnGreen(text):
     printWithColor(text, FontStyles.BOLD, FontColors.BLUE, BackgroundColors.GREEN)
 
+def printBoldWhiteOnBlue(text):
+    printWithColor(text, FontStyles.BOLD, FontColors.WHITE, BackgroundColors.BLUE)
+
 def printCyanOnGreen(text):
     printWithColor(text, FontStyles.REGULAR, FontColors.CYAN, BackgroundColors.GREEN)
 
