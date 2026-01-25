@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  
   "scripts": {
     "clean": "rimraf dist public/playground.config.json",
     "start": "npm run build:playground && npm run start:vite",
@@ -37,7 +36,7 @@
     "@spectrum-web-components/top-nav": "^0.39.3",
     "@spectrum-web-components/tray": "^0.39.3",
     "d3": "^7.8.5",
-    "d3-geomap": "^3.3.0",
+    "d3-geomap": "^4.0.0",
     "lit": "^3.1.2",
     "lodash": "^4.17.21",
     "numeral": "^2.0.6",
@@ -48,6 +47,6 @@
   "devDependencies": {
     "chalk": "^5.3.0",
     "rimraf": "^5.0.5",
-    "vite": "^4.4.5"
+    "vite": "^7.3.1"
   }
 }
